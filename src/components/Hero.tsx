@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-image.jpg";
+import facadeImage from "@/assets/facade-logo.jpg";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -69,8 +69,8 @@ const Hero = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-30 animate-float" />
             <img 
-              src={heroImage} 
-              alt="Alunos felizes aprendendo inglês na Tic Tac School"
+              src={facadeImage} 
+              alt="Fachada da Tic Tac School - Escola de Inglês"
               className="relative rounded-3xl shadow-2xl w-full animate-float"
             />
           </div>
