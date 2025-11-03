@@ -22,13 +22,13 @@ const Hero = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              <span className="text-foreground">Tic Tac</span>
+              <span className="text-foreground">Transforme seu</span>
               <br />
-              <span className="bg-gradient-primary bg-clip-text text-transparent">School</span>
+              <span className="bg-gradient-primary bg-clip-text text-transparent">Futuro com Inglês</span>
             </h1>
             
             <p className="text-xl text-muted-foreground max-w-lg">
-              Venha aprender inglês com a gente! Turmas com apenas 4 alunos, jogos, vídeos e dramatizações que ajudam a vivenciar o idioma.
+              Aprenda inglês de verdade! Turmas exclusivas com apenas 4 alunos, metodologia Worlitz, tecnologia de ponta e um ambiente que torna o aprendizado natural e divertido. Sua fluência começa aqui!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -71,7 +71,7 @@ const Hero = () => {
             <img 
               src={facadeImage} 
               alt="Fachada da Tic Tac School - Escola de Inglês"
-              className="relative rounded-3xl shadow-2xl w-full animate-float"
+              className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover object-center animate-float"
             />
           </div>
         </div>

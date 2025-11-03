@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import gestoraImage from "@/assets/gestora-gleice.jpg";
 
 const Contact = () => {
   const contactInfo = [
@@ -19,25 +20,11 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Localização",
-      value: "Rua Maria Rosa d'Elboux Bortoloti, 230\nSão Luiz - CEP: 13304-160\nItu - SP",
-      href: "https://maps.google.com/?q=Rua+Maria+Rosa+d'Elboux+Bortoloti,+230,+Itu,+SP",
+      value: "Rua Bahia, 362\nItu - SP\nCEP: 13.300-000",
+      href: "https://maps.google.com/?q=Rua+Bahia,+362,+Itu,+SP",
     },
   ];
 
-  const socialLinks = [
-    {
-      icon: Instagram,
-      label: "Instagram",
-      href: "https://www.instagram.com/tic.tac_school/",
-      color: "hover:text-pink-600",
-    },
-    {
-      icon: Facebook,
-      label: "Facebook",
-      href: "https://www.facebook.com/tictacbygleice",
-      color: "hover:text-blue-600",
-    },
-  ];
 
   return (
     <section id="contato" className="py-20 bg-gradient-hero">
@@ -80,31 +67,48 @@ const Contact = () => {
           ))}
         </div>
 
-        <Card className="p-8 text-center max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold mb-4 text-foreground">Professora Gleice</h3>
-          <p className="text-muted-foreground mb-6">
-            Fale conosco sobre suas necessidades, temos sempre uma turma que lhe atenderá.
-          </p>
-          
-          <div className="flex justify-center gap-4">
-            {socialLinks.map((social, index) => (
-              <Button
-                key={index}
-                asChild
-                variant="outline"
-                size="lg"
-                className={`${social.color} transition-colors`}
-              >
-                <a 
-                  href={social.href} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
+        <Card className="p-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-primary rounded-2xl blur-2xl opacity-20" />
+              <img 
+                src={gestoraImage} 
+                alt="Gestora Gleice - Tic Tac School"
+                className="relative rounded-2xl w-full h-[400px] object-cover shadow-xl"
+              />
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-3xl font-bold text-foreground">Conheça Nossa Gestora</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Com mais de 10 anos de experiência na Vagalume, referência em ensino de inglês na região, 
+                e vivência internacional, nossa gestora traz uma nova perspectiva para o aprendizado do idioma.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Na Tic Tac School, combinamos metodologia comprovada com inovação e paixão pelo ensino, 
+                criando um ambiente onde cada aluno alcança seu máximo potencial.
+              </p>
+              
+              <div className="pt-4">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="hover:text-pink-600 transition-colors"
                 >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              </Button>
-            ))}
+                  <a 
+                    href="https://www.instagram.com/tic.tac_school/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="flex items-center gap-2"
+                  >
+                    <Instagram className="w-5 h-5" />
+                    Siga-nos no Instagram
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
         </Card>
       </div>
