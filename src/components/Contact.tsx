@@ -20,7 +20,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Localização",
-      value: "Rua Bahia, 362\nItu - SP\nCEP: 13.300-000",
+      value: "Rua Bahia, 362\nItu - SP\nCEP: 13301-430",
       href: "https://maps.google.com/?q=Rua+Bahia,+362,+Itu,+SP",
     },
   ];
@@ -100,7 +100,7 @@ const Contact = () => {
                     href="https://www.instagram.com/tic.tac_school/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    aria-label="Instagram"
+                    aria-label="Instagram da Tic Tac School"
                     className="flex items-center gap-2"
                   >
                     <Instagram className="w-5 h-5" />
