@@ -8,20 +8,46 @@ export const useAutoCloseLovableBadge = () => {
         '.lovable-banner button',
         '[data-lovable-banner] button',
         'div[class*="lovable"] button[aria-label*="close"]',
-        'div[class*="banner"] button[aria-label*="close"]'
+        'div[class*="banner"] button[aria-label*="close"]',
+        'button[aria-label="Close"]',
+        'iframe + div button',
+        'div[style*="z-index"] button'
       ];
       
       for (const selector of selectors) {
         const closeButton = document.querySelector(selector);
         if (closeButton && closeButton instanceof HTMLElement) {
           closeButton.click();
-          return;
+          return true;
         }
       }
+      return false;
     };
 
+    // Tenta fechar imediatamente
     closeLovableBadge();
-    const timer = setTimeout(closeLovableBadge, 1000);
-    return () => clearTimeout(timer);
+    
+    // Tenta novamente após intervalos
+    const timers = [
+      setTimeout(closeLovableBadge, 500),
+      setTimeout(closeLovableBadge, 1000),
+      setTimeout(closeLovableBadge, 2000),
+      setTimeout(closeLovableBadge, 3000)
+    ];
+
+    // Observa mudanças no DOM para fechar o banner quando aparecer
+    const observer = new MutationObserver(() => {
+      closeLovableBadge();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+      observer.disconnect();
+    };
   }, []);
 };
