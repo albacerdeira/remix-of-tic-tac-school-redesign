@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="w-full bg-primary/10 backdrop-blur-sm py-3 px-4 relative z-20 animate-fade-in">
         <div className="container mx-auto flex items-center justify-center gap-2 text-sm md:text-base">
           <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary" />
-          <span className="text-foreground font-medium">Rua Bahia, 362 - Itu, SP - CEP: 13301-430</span>
+          <span className="text-foreground font-medium text-[0.7rem] md:text-xs">Rua Bahia, 362 - Itu, SP - CEP: 13301-430</span>
         </div>
       </div>
 
