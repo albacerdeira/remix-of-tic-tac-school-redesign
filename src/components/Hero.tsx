@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
 import logoImage from "@/assets/logo-tic-tac.png";
+import ContactDialog from "./ContactDialog";
+
 const Hero = () => {
+  const [contactDialogOpen, setContactDialogOpen] = useState(false);
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({
@@ -45,7 +50,7 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12 px-4">
-            <Button variant="hero" size="lg" onClick={() => scrollToSection('contato')} className="group w-full sm:w-auto">
+            <Button variant="hero" size="lg" onClick={() => setContactDialogOpen(true)} className="group w-full sm:w-auto">
               Não Espere Mais
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -53,6 +58,8 @@ const Hero = () => {
               Nossos Cursos
             </Button>
           </div>
+          
+          <ContactDialog open={contactDialogOpen} onOpenChange={setContactDialogOpen} />
           
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-6 md:gap-12 px-4">
