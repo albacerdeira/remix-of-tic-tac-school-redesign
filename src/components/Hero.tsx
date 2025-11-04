@@ -14,10 +14,10 @@ const Hero = () => {
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" />
       
       {/* Location bar */}
-      <div className="w-full bg-primary/10 backdrop-blur-sm py-3 px-4 relative z-20 animate-fade-in">
-        <div className="container mx-auto flex items-center justify-center gap-2 text-sm md:text-base">
+      <div className="w-full bg-primary/10 backdrop-blur-sm py-2 px-4 relative z-20 animate-fade-in">
+        <div className="container mx-auto flex items-center justify-center gap-2">
           <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary" />
-          <span className="text-foreground font-medium">Rua Bahia, 362 - Itu, SP - CEP: 13301-430</span>
+          <span className="text-foreground font-medium text-xs md:text-sm">Rua Bahia, 362 - Itu, SP - CEP: 13301-430</span>
         </div>
       </div>
 
@@ -25,7 +25,7 @@ const Hero = () => {
         <div className="w-full">
           {/* Logo and Title Section - Centered on mobile */}
           <div className="flex flex-col items-center text-center mb-8 md:mb-12 space-y-4 md:space-y-6 animate-slide-in">
-            <div className="relative w-full max-w-[200px] md:max-w-[280px] mx-auto">
+            <div className="relative w-full max-w-[160px] md:max-w-[240px] mx-auto">
               <div className="absolute inset-0 bg-gradient-primary rounded-3xl blur-2xl opacity-20 animate-float" />
               <img src={logoImage} alt="Logo Tic Tac School - By Teacher Gleice" className="relative w-full h-auto rounded-2xl shadow-2xl animate-fade-in" />
             </div>
@@ -38,7 +38,9 @@ const Hero = () => {
               <span className="bg-gradient-primary bg-clip-text text-transparent">Futuro com Inglês</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl px-4">Começar já!</p>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl px-4">
+              Aprenda inglês de verdade! Turmas exclusivas com apenas 4 alunos, metodologia Worlitz, tecnologia de ponta e um ambiente que torna o aprendizado natural e divertido. Sua fluência começa aqui!
+            </p>
           </div>
 
           {/* CTA Buttons */}
