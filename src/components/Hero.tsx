@@ -22,7 +22,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-4 md:py-12 relative z-10 flex-1 flex items-center">
+      <div className="container mx-auto px-4 py-2 md:py-6 relative z-10 flex-1 flex items-center">
         <div className="w-full">
           {/* Logo and Title Section - Centered on mobile */}
           <div className="flex flex-col items-center text-center mb-8 md:mb-12 space-y-4 md:space-y-6 animate-slide-in">
