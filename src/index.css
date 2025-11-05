@@ -19,13 +19,13 @@ All colors MUST be HSL.
 
     --primary: 270 70% 60%;
     --primary-foreground: 0 0% 100%;
-    
+
     --primary-light: 270 70% 75%;
     --primary-dark: 270 80% 45%;
 
     --secondary: 45 95% 60%;
     --secondary-foreground: 270 60% 20%;
-    
+
     --secondary-light: 45 100% 70%;
     --secondary-dark: 45 90% 50%;
 
@@ -43,16 +43,16 @@ All colors MUST be HSL.
     --ring: 270 70% 60%;
 
     --radius: 1rem;
-    
+
     /* Custom design tokens */
     --gradient-primary: linear-gradient(135deg, hsl(270 80% 65%) 0%, hsl(280 75% 55%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(40 95% 55%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(270 80% 95%) 0%, hsl(45 100% 95%) 100%);
-    
+
     --shadow-sm: 0 2px 8px hsl(270 70% 60% / 0.1);
     --shadow-md: 0 4px 16px hsl(270 70% 60% / 0.15);
     --shadow-lg: 0 8px 32px hsl(270 70% 60% / 0.2);
-    
+
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
@@ -77,13 +77,13 @@ All colors MUST be HSL.
 
     --primary: 270 70% 65%;
     --primary-foreground: 0 0% 100%;
-    
+
     --primary-light: 270 70% 75%;
     --primary-dark: 270 80% 45%;
 
     --secondary: 45 95% 55%;
     --secondary-foreground: 270 60% 10%;
-    
+
     --secondary-light: 45 100% 70%;
     --secondary-dark: 45 90% 45%;
 
@@ -99,11 +99,11 @@ All colors MUST be HSL.
     --border: 270 30% 25%;
     --input: 270 30% 25%;
     --ring: 270 70% 65%;
-    
+
     --gradient-primary: linear-gradient(135deg, hsl(270 80% 65%) 0%, hsl(280 75% 55%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(40 95% 55%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(270 60% 15%) 0%, hsl(270 50% 20%) 100%);
-    
+
     --shadow-sm: 0 2px 8px hsl(0 0% 0% / 0.3);
     --shadow-md: 0 4px 16px hsl(0 0% 0% / 0.4);
     --shadow-lg: 0 8px 32px hsl(0 0% 0% / 0.5);
@@ -127,4 +127,15 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+a[hrer="lovable.dev"],
+iframe [sre="lovable.dev"],
+div[style="Edit with Lovable"],
+.lovable-badge {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -9999 !important;
 }
