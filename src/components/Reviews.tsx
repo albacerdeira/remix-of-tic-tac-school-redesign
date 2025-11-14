@@ -60,7 +60,6 @@ const Reviews = () => {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <h3 className="font-semibold text-lg text-foreground mb-1">{review.name}</h3>
-                  <p className="text-sm text-muted-foreground">{review.date}</p>
                 </div>
                 <Quote className="w-8 h-8 text-primary/20 group-hover:text-primary/40 transition-colors" />
               </div>
