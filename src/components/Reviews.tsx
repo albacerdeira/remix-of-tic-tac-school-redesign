@@ -16,9 +16,9 @@ const Reviews = () => {
       date: "há 3 meses",
     },
     {
-      name: "Ana Paula",
+      name: "Marcia Martins - Facebook",
       rating: 5,
-      text: "Melhor escola de inglês de Itu! Meu filho evoluiu muito desde que começou. Super recomendo!",
+      text: "A teacher Gleice alem de ser muito boa professora e com muita experiencia com a lingua Inglesa ela adora o que faz e as criancas aprendem brincando. Literalmente. Super recomendo.",
       date: "há 1 mês",
     },
     {
