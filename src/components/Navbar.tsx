@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Star } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -22,13 +22,27 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <button 
-            onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold"
-          >
-            <span className="text-primary">Tic Tac</span>
-            <span className="text-secondary"> School</span>
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => scrollToSection('hero')}
+              className="text-2xl font-bold"
+            >
+              <span className="text-primary">Tic Tac</span>
+              <span className="text-secondary"> School</span>
+            </button>
+            
+            {/* Google Reviews Badge */}
+            <a
+              href="https://www.google.com/search?q=Tic+Tac+School&stick=H4sIAAAAAAAA_-NgU1I1qLA0SU4zSbM0SUkyTjGzNDO2MqgwtTBNMzE1sDQwMU1MtjBIXsTKF5KZrBCSmKwQnJyRn58DAHKGQTI6AAAA&hl=pt-BR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1 px-3 py-1.5 bg-primary/10 rounded-full hover:bg-primary/20 transition-colors"
+            >
+              <Star className="w-4 h-4 fill-primary text-primary" />
+              <span className="text-sm font-semibold text-primary">5.0</span>
+              <span className="text-xs text-muted-foreground">(50+)</span>
+            </a>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
