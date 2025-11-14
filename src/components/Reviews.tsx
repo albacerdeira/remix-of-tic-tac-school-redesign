@@ -49,9 +49,7 @@ const Reviews = () => {
             O que dizem <span className="text-primary">nossos alunos</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-secondary mx-auto mb-6" />
-          <p className="text-lg text-muted-foreground">
-            Avaliações reais de pais e alunos que confiam na Tic Tac School
-          </p>
+          <p className="text-lg text-muted-foreground">Avaliações de pais e alunos que confiam na Tic Tac School</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
