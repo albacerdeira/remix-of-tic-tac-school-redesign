@@ -15,6 +15,7 @@ const Navbar = () => {
     { label: "Início", id: "hero" },
     { label: "Quem Somos", id: "quemsomos" },
     { label: "Cursos", id: "cursos" },
+    { label: "O que dizem nossos alunos", id: "avaliacoes" },
     { label: "Contato", id: "contato" },
   ];
 
@@ -40,7 +41,6 @@ const Navbar = () => {
             >
               <Star className="w-4 h-4 fill-primary text-primary" />
               <span className="text-sm font-semibold text-primary">5.0</span>
-              <span className="text-xs text-muted-foreground">(50+)</span>
             </a>
           </div>
 
