@@ -10,9 +10,9 @@ const Reviews = () => {
       date: "há 3 anos",
     },
     {
-      name: "João Santos",
+      name: "Viviane Medeiros",
       rating: 5,
-      text: "Excelente escola! Professores qualificados e dedicados. O ambiente é acolhedor e a metodologia realmente funciona.",
+      text: "Se existe escola de inglês melhor do que a Tic tac, desconheço!!!!! Lugar e estruturas excelentes, onde os alunos vivenciam a língua inglesa na prática, de forma lúdica e divertida!!!! The best English School ever!!!! ❤️❤️❤️❤️",
       date: "há 3 meses",
     },
     {
