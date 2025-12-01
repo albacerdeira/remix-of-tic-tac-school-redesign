@@ -1,4 +1,5 @@
 import { Instagram, Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToSection = (id: string) => {
@@ -45,6 +46,14 @@ const Footer = () => {
                 >
                   Contato
                 </button>
+              </li>
+              <li>
+                <Link 
+                  to="/politica-de-privacidade"
+                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                >
+                  Política de Privacidade
+                </Link>
               </li>
             </ul>
           </div>
