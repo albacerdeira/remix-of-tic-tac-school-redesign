@@ -38,6 +38,36 @@ export type Database = {
         }
         Relationships: []
       }
+      enrollment_inquiries: {
+        Row: {
+          child_age: number | null
+          course_for: string
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          whatsapp: string
+        }
+        Insert: {
+          child_age?: number | null
+          course_for: string
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          whatsapp: string
+        }
+        Update: {
+          child_age?: number | null
+          course_for?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
