@@ -65,6 +65,34 @@ const PoliticaDePrivacidade = () => {
 
             <section>
               <h2 className="text-xl font-semibold text-foreground mt-8 mb-4">
+                Microsoft Clarity
+              </h2>
+              <p className="leading-relaxed">
+                Nós fazemos parceria com o Microsoft Clarity e o Microsoft
+                Advertising para capturar como você usa e interage com nosso site
+                por meio de métricas comportamentais, mapas de calor e reprodução
+                de sessões, a fim de aprimorar e comercializar nossos
+                produtos/serviços. Os dados de uso do site são coletados usando
+                cookies próprios e de terceiros e outras tecnologias de
+                rastreamento para determinar a popularidade dos produtos/serviços
+                e a atividade online. Além disso, usamos essas informações para
+                otimização do site, fins de prevenção a fraudes/segurança e
+                publicidade. Para obter mais informações sobre como a Microsoft
+                coleta e usa seus dados, visite a{" "}
+                <a
+                  href="https://www.microsoft.com/pt-br/privacy/privacystatement"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-dark underline transition-colors"
+                >
+                  Declaração de Privacidade da Microsoft
+                </a>
+                .
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-foreground mt-8 mb-4">
                 Seus Direitos
               </h2>
               <p className="leading-relaxed">
