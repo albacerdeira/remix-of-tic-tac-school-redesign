@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, MessageCircle } from "lucide-react";
 import logoImage from "@/assets/logo-tic-tac.png";
 import ContactDialog from "./ContactDialog";
 
@@ -64,7 +64,7 @@ const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-6 md:gap-12 px-4">
             <div className="text-center">
-              <p className="text-3xl md:text-4xl font-bold text-primary">✓</p>
+              <MessageCircle className="text-3xl md:text-4xl text-primary w-8 h-8 md:w-10 md:h-10 mx-auto" />
               <p className="text-xs md:text-sm text-muted-foreground">Turmas Reduzidas</p>
             </div>
             <div className="text-center">
