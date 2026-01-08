@@ -6,6 +6,17 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+const sendNotificationEmail = async (data: { type: "contact"; name: string; phone: string; email: string }) => {
+  try {
+    const response = await supabase.functions.invoke("send-notification-email", {
+      body: data,
+    });
+    console.log("Email notification response:", response);
+  } catch (error) {
+    console.error("Error sending email notification:", error);
+  }
+};
+
 interface ContactDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -34,6 +45,9 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         .insert([{ name, phone, email }]);
 
       if (error) throw error;
+
+      // Send email notification (non-blocking)
+      sendNotificationEmail({ type: "contact", name, phone, email });
 
       // Redirect to WhatsApp
       const whatsappNumber = "5511947764601";

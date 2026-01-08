@@ -12,6 +12,24 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
+const sendNotificationEmail = async (data: {
+  type: "enrollment";
+  name: string;
+  whatsapp: string;
+  email?: string;
+  courseFor: string;
+  childAge?: number | null;
+}) => {
+  try {
+    const response = await supabase.functions.invoke("send-notification-email", {
+      body: data,
+    });
+    console.log("Email notification response:", response);
+  } catch (error) {
+    console.error("Error sending email notification:", error);
+  }
+};
+
 const formSchema = z.object({
   fullName: z.string().trim().min(3, "Nome completo é obrigatório").max(100),
   whatsapp: z.string().trim().min(10, "WhatsApp com DDD é obrigatório").max(15),
@@ -53,6 +71,16 @@ const Contact = () => {
       });
 
       if (error) throw error;
+
+      // Send email notification (non-blocking)
+      sendNotificationEmail({
+        type: "enrollment",
+        name: data.fullName,
+        whatsapp: data.whatsapp,
+        email: data.email || undefined,
+        courseFor: data.courseFor,
+        childAge: data.courseFor === "child" ? data.childAge : null,
+      });
 
       toast({
         title: "Enviado com sucesso!",
