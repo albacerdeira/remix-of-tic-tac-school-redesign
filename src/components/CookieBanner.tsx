@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 
 const COOKIE_CONSENT_KEY = "cookie-consent-accepted";
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+    fbq: (...args: unknown[]) => void;
+  }
+}
+
 const CookieBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -17,6 +24,19 @@ const CookieBanner = () => {
   const handleAccept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "true");
     setIsVisible(false);
+
+    // Send consent to Google Tag Manager via dataLayer
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: "cookie_consent",
+        cookie_consent: "accepted",
+      });
+    }
+
+    // Send consent event to Facebook Pixel
+    if (typeof window.fbq === "function") {
+      window.fbq("trackCustom", "CookieConsent", { status: "accepted" });
+    }
   };
 
   if (!isVisible) return null;
