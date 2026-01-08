@@ -1,4 +1,7 @@
 project_id = "cicmygahhedljetghymv"
 
+[functions.submit-contact]
+verify_jwt = false
+
 [functions.send-notification-email]
 verify_jwt = false

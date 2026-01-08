@@ -12,23 +12,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
-const sendNotificationEmail = async (data: {
-  type: "enrollment";
-  name: string;
-  whatsapp: string;
-  email?: string;
-  courseFor: string;
-  childAge?: number | null;
-}) => {
-  try {
-    const response = await supabase.functions.invoke("send-notification-email", {
-      body: data,
-    });
-    console.log("Email notification response:", response);
-  } catch (error) {
-    console.error("Error sending email notification:", error);
-  }
-};
 
 const formSchema = z.object({
   fullName: z.string().trim().min(3, "Nome completo é obrigatório").max(100),
@@ -62,25 +45,39 @@ const Contact = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("enrollment_inquiries").insert({
-        full_name: data.fullName,
-        whatsapp: data.whatsapp,
-        email: data.email || null,
-        course_for: data.courseFor,
-        child_age: data.courseFor === "child" ? data.childAge : null,
+      // Use rate-limited edge function
+      const { data: response, error } = await supabase.functions.invoke("submit-contact", {
+        body: {
+          type: "enrollment",
+          fullName: data.fullName,
+          whatsapp: data.whatsapp,
+          email: data.email || undefined,
+          courseFor: data.courseFor,
+          childAge: data.courseFor === "child" ? data.childAge : undefined,
+        },
       });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message || "Erro ao salvar dados");
+      }
 
-      // Send email notification (non-blocking)
-      sendNotificationEmail({
-        type: "enrollment",
-        name: data.fullName,
-        whatsapp: data.whatsapp,
-        email: data.email || undefined,
-        courseFor: data.courseFor,
-        childAge: data.courseFor === "child" ? data.childAge : null,
-      });
+      if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        toast({
+          title: "Limite atingido",
+          description: "Você já enviou muitas solicitações. Tente novamente mais tarde.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (response?.code === "VALIDATION_ERROR") {
+        toast({
+          title: "Erro de validação",
+          description: response.error || "Verifique os dados informados.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       toast({
         title: "Enviado com sucesso!",
@@ -99,7 +96,9 @@ const Contact = () => {
       reset();
       setShowAgeInput(false);
     } catch (error) {
-      console.error("Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error:", error);
+      }
       toast({
         title: "Erro ao enviar",
         description: "Tente novamente mais tarde.",
