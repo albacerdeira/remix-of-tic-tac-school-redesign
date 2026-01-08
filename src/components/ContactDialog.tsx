@@ -5,17 +5,29 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-const sendNotificationEmail = async (data: { type: "contact"; name: string; phone: string; email: string }) => {
-  try {
-    const response = await supabase.functions.invoke("send-notification-email", {
-      body: data,
-    });
-    console.log("Email notification response:", response);
-  } catch (error) {
-    console.error("Error sending email notification:", error);
-  }
-};
+const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Nome deve ter pelo menos 2 caracteres")
+    .max(100, "Nome deve ter no máximo 100 caracteres"),
+  phone: z
+    .string()
+    .trim()
+    .min(10, "Telefone deve ter pelo menos 10 dígitos")
+    .max(20, "Telefone deve ter no máximo 20 caracteres"),
+  email: z
+    .string()
+    .trim()
+    .email("Email inválido")
+    .max(255, "Email deve ter no máximo 255 caracteres"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 interface ContactDialogProps {
   open: boolean;
@@ -23,31 +35,54 @@ interface ContactDialogProps {
 }
 
 const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const isFormValid = name.trim() !== "" && phone.trim() !== "" && email.trim() !== "";
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onChange",
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!isFormValid) return;
-
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
     try {
-      // Save to database
-      const { error } = await supabase
-        .from("contacts")
-        .insert([{ name, phone, email }]);
+      // Use rate-limited edge function
+      const { data: response, error } = await supabase.functions.invoke("submit-contact", {
+        body: {
+          type: "contact",
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+        },
+      });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message || "Erro ao salvar dados");
+      }
 
-      // Send email notification (non-blocking)
-      sendNotificationEmail({ type: "contact", name, phone, email });
+      if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        toast({
+          title: "Limite atingido",
+          description: "Você já enviou muitos contatos. Tente novamente mais tarde.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (response?.code === "VALIDATION_ERROR") {
+        toast({
+          title: "Erro de validação",
+          description: response.error || "Verifique os dados informados.",
+          variant: "destructive",
+        });
+        return;
+      }
 
       // Redirect to WhatsApp
       const whatsappNumber = "5511947764601";
@@ -57,9 +92,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       window.open(whatsappUrl, "_blank");
       
       // Reset form and close dialog
-      setName("");
-      setPhone("");
-      setEmail("");
+      reset();
       onOpenChange(false);
 
       toast({
@@ -67,7 +100,9 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         description: "Seus dados foram salvos. Redirecionando para o WhatsApp...",
       });
     } catch (error) {
-      console.error("Error saving contact:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error saving contact:", error);
+      }
       toast({
         title: "Erro",
         description: "Não foi possível salvar seus dados. Tente novamente.",
@@ -87,26 +122,28 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
             Preencha seus dados para entrar em contato conosco via WhatsApp
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Nome</Label>
             <Input
               id="name"
               placeholder="Seu nome completo"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+              {...register("name")}
             />
+            {errors.name && (
+              <p className="text-sm text-destructive">{errors.name.message}</p>
+            )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Telefone</Label>
             <Input
               id="phone"
               placeholder="(11) 99999-9999"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
+              {...register("phone")}
             />
+            {errors.phone && (
+              <p className="text-sm text-destructive">{errors.phone.message}</p>
+            )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -114,15 +151,16 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
               id="email"
               type="email"
               placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("email")}
             />
+            {errors.email && (
+              <p className="text-sm text-destructive">{errors.email.message}</p>
+            )}
           </div>
           <Button
             type="submit"
             className="w-full"
-            disabled={!isFormValid || isSubmitting}
+            disabled={!isValid || isSubmitting}
           >
             {isSubmitting ? "Enviando..." : "Entrar em Contato"}
           </Button>
