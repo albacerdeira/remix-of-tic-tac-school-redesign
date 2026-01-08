@@ -6,8 +6,9 @@ const COOKIE_CONSENT_KEY = "cookie-consent-accepted";
 
 declare global {
   interface Window {
-    dataLayer: Record<string, unknown>[];
+    dataLayer: unknown[];
     fbq: (...args: unknown[]) => void;
+    gtag: (...args: unknown[]) => void;
   }
 }
 
@@ -25,7 +26,19 @@ const CookieBanner = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "true");
     setIsVisible(false);
 
-    // Send consent to Google Tag Manager via dataLayer
+    // Update Google Consent Mode v2 to granted
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        analytics_storage: "granted",
+        functionality_storage: "granted",
+        personalization_storage: "granted",
+      });
+    }
+
+    // Send consent event to dataLayer for GTM triggers
     if (window.dataLayer) {
       window.dataLayer.push({
         event: "cookie_consent",

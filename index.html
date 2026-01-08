@@ -23,6 +23,28 @@
   <meta name="twitter:description" content="Escola de inglês com turmas reduzidas e material escolar. Metodologia Worlitz para crianças, adolescentes e adultos em Itu, SP.">
   <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/hacLywe15UaS0TgCtMAKmMUnNT03/uploads/1762283494281-logo-tic-tac.png">
   
+  <!-- Google Consent Mode v2 - Default State (MUST be before GTM) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Check if user has already consented
+    var hasConsent = localStorage.getItem('cookie-consent-accepted') === 'true';
+    
+    // Set default consent state
+    gtag('consent', 'default', {
+      'ad_storage': hasConsent ? 'granted' : 'denied',
+      'ad_user_data': hasConsent ? 'granted' : 'denied',
+      'ad_personalization': hasConsent ? 'granted' : 'denied',
+      'analytics_storage': hasConsent ? 'granted' : 'denied',
+      'functionality_storage': hasConsent ? 'granted' : 'denied',
+      'personalization_storage': hasConsent ? 'granted' : 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+  </script>
+  <!-- End Google Consent Mode v2 -->
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
