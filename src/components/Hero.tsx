@@ -64,8 +64,8 @@ const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-6 md:gap-12 px-4">
             <div className="text-center">
-              <p className="text-3xl md:text-4xl font-bold text-primary">4</p>
-              <p className="text-xs md:text-sm text-muted-foreground">Alunos por turma</p>
+              <p className="text-3xl md:text-4xl font-bold text-primary">✓</p>
+              <p className="text-xs md:text-sm text-muted-foreground">Turmas Reduzidas</p>
             </div>
             <div className="text-center">
               <p className="text-3xl md:text-4xl font-bold text-primary">100%</p>
