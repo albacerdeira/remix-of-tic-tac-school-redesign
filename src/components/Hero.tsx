@@ -44,7 +44,7 @@ const Hero = () => {
             </h1>
             
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl px-4">
-              Aprenda inglês de verdade! Turmas exclusivas com apenas 4 alunos, metodologia Worlitz, tecnologia de ponta e um ambiente que torna o aprendizado natural e divertido. Sua fluência começa aqui!
+              Aprenda inglês de verdade! Turmas reduzidas, metodologia Worlitz, tecnologia de ponta e um ambiente que torna o aprendizado natural e divertido. Sua fluência começa aqui!
             </p>
           </div>
 
