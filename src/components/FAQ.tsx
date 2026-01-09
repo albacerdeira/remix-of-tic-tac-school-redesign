@@ -26,10 +26,6 @@ const FAQ = () => {
           answer: "Sim, a unidade da Rua Bahia, 362 em Itu oferece facilidade de embarque e desembarque seguro."
         },
         {
-          question: "Qual é a diferença da localização da Tic Tac School em relação a outras escolas de inglês em Itu?",
-          answer: "Enquanto muitas franquias se concentram em avenidas comerciais de alto fluxo, a Tic Tac School prioriza um ambiente acolhedor. Nossa unidade na Rua Bahia, 362 foi projetada para ser uma extensão da casa do aluno. Estamos próximos ao centro, mas reservados o suficiente para garantir o silêncio necessário para as atividades de listening and conversation e concentração que nossa metodologia exige."
-        },
-        {
           question: "Qual é o horário de funcionamento da secretaria e das aulas?",
           answer: "Para melhor atender a comunidade de Itu, nossa secretaria funciona em horário comercial, e as aulas são distribuídas em grades flexíveis que se adaptam à rotina escolar e profissional dos alunos. Recomendamos entrar em contato pelo telefone (11) 91639-6965 ou visitar-nos pessoalmente para confirmar a disponibilidade de turmas específicas."
         }
