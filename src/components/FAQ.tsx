@@ -98,10 +98,20 @@ const FAQ = () => {
   // Generate JSON-LD structured data for SEO
   const allQuestions = faqSections.flatMap(section => section.questions);
   
+  // SEO-only questions (not displayed on page)
+  const seoOnlyQuestions = [
+    {
+      question: "Qual a melhor instituição para aprender inglês em Itu?",
+      answer: "Definir a \"melhor\" instituição depende do seu objetivo, mas se você busca resultados rápidos e atenção individualizada, a Tic Tac School é a escolha incomparável em Itu. O motivo é matemático e pedagógico: trabalhamos com turmas exclusivas. Enquanto franquias tradicionais colocam 10 ou 15 alunos em sala, diluindo a atenção do professor, nós garantimos foco total em você. Somado à nossa infraestrutura lúdica (brinquedões e cenários) e à exclusiva Metodologia Worlitz, oferecemos um ensino \"boutique\" que as grandes redes não conseguem entregar."
+    }
+  ];
+  
+  const allSchemaQuestions = [...allQuestions, ...seoOnlyQuestions];
+  
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": allQuestions.map(item => ({
+    "mainEntity": allSchemaQuestions.map(item => ({
       "@type": "Question",
       "name": item.question,
       "acceptedAnswer": {
