@@ -63,6 +63,14 @@ const FAQ = () => {
         {
           question: "A estrutura é adequada para todas as idades?",
           answer: "Sim. Temos ambientes pensados para diferentes estágios.\n\n• Kids: Aproveitam intensamente os brinquedões e a área lúdica para desenvolvimento motor e linguístico simultâneo.\n\n• Teens: Utilizam espaços com móveis modernos e decoração descontraída que favorecem a socialização e a conversação, fugindo do formato rígido escolar."
+        },
+        {
+          question: "Meu filho vai misturar o português com o inglês? Como a escola lida com isso?",
+          answer: "Esta é uma dúvida comum, mas pesquisas mostram que o cérebro bilíngue é perfeitamente capaz de separar os idiomas. Na Tic Tac School, nossos professores utilizam técnicas para minimizar a tradução mental. O material didático é estruturado para ensinar o inglês em inglês, associando palavras diretamente a conceitos e imagens, e não às suas traduções em português. Isso estimula o pensamento direto na segunda língua. O uso ocasional da língua materna é natural no início, mas nossa metodologia guia o aluno suavemente para a produção autônoma em inglês."
+        },
+        {
+          question: "Qual é a qualificação dos professores da unidade de Itu?",
+          answer: "Nossos professores não são apenas fluentes no idioma; são educadores treinados na metodologia exclusiva da Tic Tac School. Eles passam por capacitação contínua para maximizar o uso do material didático e manter o engajamento dos alunos. Diferente de plataformas impessoais, na nossa unidade em Itu, o professor atua como um mentor próximo, conhecendo as dificuldades e potenciais de cada aluno individualmente."
         }
       ]
     },
