@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MapPin, BookOpen, GraduationCap, ClipboardList } from "lucide-react";
+import { useEffect } from "react";
 
 const FAQ = () => {
   const faqSections = [
@@ -93,6 +94,43 @@ const FAQ = () => {
       ]
     }
   ];
+
+  // Generate JSON-LD structured data for SEO
+  const allQuestions = faqSections.flatMap(section => section.questions);
+  
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": allQuestions.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer.replace(/\n/g, ' ')
+      }
+    }))
+  };
+
+  useEffect(() => {
+    // Add JSON-LD script to head
+    const existingScript = document.querySelector('script[data-faq-schema]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-faq-schema', 'true');
+    script.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.querySelector('script[data-faq-schema]');
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, []);
 
   return (
     <section id="faq" className="py-20 bg-muted/30">
