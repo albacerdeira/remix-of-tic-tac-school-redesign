@@ -19,8 +19,8 @@ const Index = () => {
         <About />
         <Courses />
         <Reviews />
-        <FAQ />
         <Contact />
+        <FAQ />
       </main>
       <Footer />
       <WhatsAppButton />
