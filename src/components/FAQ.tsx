@@ -37,7 +37,7 @@ const FAQ = () => {
       questions: [
         {
           question: "Qual material didático a escola utiliza?",
-          answer: "Utilizamos material didático próprio e exclusivo. Não adotamos livros genéricos de franquias. Nosso material é desenvolvido internamente para se conectar perfeitamente com nossa realidade e nossa estrutura. As atividades do livro muitas vezes convidam o aluno a interagir com os móveis e o espaço físico da escola, criando uma experiência que une o papel à prática."
+          answer: "Utilizamos material didático próprio e exclusivo. Não adotamos livros genéricos de franquias. Nosso material é desenvolvido internamente para se conectar perfeitamente com nossa realidade e nossa estrutura. As atividades do livro muitas vezes convidam o aluno a interagir com o espaço físico da escola, criando uma experiência que une o papel à prática."
         },
         {
           question: "A lista de material escolar é extensa?",
