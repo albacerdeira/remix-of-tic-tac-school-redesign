@@ -39,24 +39,16 @@ const FAQ = () => {
       title: "Material Didático e Material Escolar",
       questions: [
         {
-          question: "Qual material didático a escola utiliza? Tenho que comprar livros importados caros?",
-          answer: "Este é um dos nossos maiores diferenciais: a Tic Tac School utiliza material didático próprio e exclusivo. Diferente de franquias que obrigam a compra de kits padronizados e caríssimos, ou escolas que utilizam livros importados genéricos, nós desenvolvemos nosso próprio conteúdo. Isso significa que o material didático é 100% alinhado com a nossa metodologia e com a realidade dos alunos de Itu, garantindo que cada página da apostila seja relevante e utilizada em aula."
+          question: "Qual material didático a escola utiliza?",
+          answer: "Utilizamos material didático próprio e exclusivo. Não adotamos livros genéricos de franquias. Nosso material é desenvolvido internamente para se conectar perfeitamente com nossa realidade e nossa estrutura. As atividades do livro muitas vezes convidam o aluno a interagir com os móveis e o espaço físico da escola, criando uma experiência que une o papel à prática."
         },
         {
-          question: "É necessário comprar uma lista de material escolar extensa além do material didático?",
-          answer: "Não. Na Tic Tac School, o material escolar deve ser um facilitador, não um fardo financeiro. Como nosso material didático é próprio, ele já engloba a maior parte das atividades necessárias. A lista complementar de material escolar é simples, focada apenas em itens de uso pessoal para as dinâmicas lúdicas (como lápis de cor, tesoura e caderno de anotações), evitando desperdícios comuns em listas genéricas."
+          question: "A lista de material escolar é extensa?",
+          answer: "Não. Como temos material próprio e uma escola totalmente equipada com jogos e brinquedos educativos, a família não precisa comprar itens caros. A lista de material escolar resume-se a itens de uso pessoal. A \"tecnologia\" de brincar (a estrutura física) já é fornecida pela Tic Tac School."
         },
         {
-          question: "O material didático próprio possui a mesma qualidade de editoras internacionais?",
-          answer: "Sim, e com a vantagem da personalização. Nosso material didático foi desenvolvido por especialistas em ensino de língua inglesa, seguindo as diretrizes do Quadro Europeu Comum de Referência para Línguas (CEFR). Ele combina o rigor acadêmico internacional com a flexibilidade que só um material autoral permite. Ele é constantemente atualizado pela nossa equipe pedagógica, sem a burocracia das grandes editoras, garantindo que o aluno sempre tenha acesso a textos e exercícios modernos."
-        },
-        {
-          question: "Existe confusão entre o material da escola e os livros \"Tic Tac\" da Editora do Brasil?",
-          answer: "É fundamental esclarecer: o nosso material didático é próprio e exclusivo da Tic Tac School de Itu. Não temos vínculo com a coleção infantil \"Tic Tac\" da Editora do Brasil que você encontra em livrarias comuns. Você não encontrará nosso material à venda em papelarias externas ou na internet, pois ele é uma ferramenta exclusiva dos nossos alunos matriculados, desenhada especificamente para o nosso método de ensino."
-        },
-        {
-          question: "Posso reutilizar o material didático de um irmão ou amigo que já estudou na escola?",
-          answer: "Como nosso material didático é focado na interatividade, ele funciona como um registro do aprendizado do aluno (workbook), onde são feitos exercícios, anotações e autoavaliações. Por isso, ele é de uso individual. No entanto, por ser um material próprio, conseguimos oferecer condições comerciais muito mais justas e acessíveis para as famílias de Itu do que as escolas que dependem de livros importados cotados em dólar."
+          question: "Existe confusão com os livros \"Tic Tac\" da Editora do Brasil?",
+          answer: "Nosso material didático é exclusivo da Tic Tac School de Itu e não tem vínculo com a Editora do Brasil. Ele é feito sob medida para nossos alunos e para nossa metodologia que utiliza a infraestrutura lúdica da escola como suporte de ensino."
         }
       ]
     },
