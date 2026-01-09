@@ -89,7 +89,7 @@ const Contact = () => {
         `Olá! Gostaria de me matricular. Meu nome é ${data.fullName}.`
       );
       window.open(
-        `https://api.whatsapp.com/send?phone=5511947764601&text=${whatsappMessage}`,
+        `https://api.whatsapp.com/send?phone=5511916396965&text=${whatsappMessage}`,
         "_blank"
       );
 
@@ -113,8 +113,8 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Telefone",
-      value: "(11) 94776-4601",
-      href: "tel:+5511947764601",
+      value: "(11) 91639-6965",
+      href: "tel:+5511916396965",
     },
     {
       icon: Mail,
