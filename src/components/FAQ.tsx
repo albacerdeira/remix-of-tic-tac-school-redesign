@@ -13,12 +13,16 @@ const FAQ = () => {
       title: "Localização e Infraestrutura",
       questions: [
         {
-          question: "Onde a Tic Tac School está localizada exatamente e como chego lá?",
-          answer: "A Tic Tac School é a sua referência de escola de inglês em Itu, estrategicamente situada na Rua Bahia, 362, no bairro Vila Nova. Nossa localização foi escolhida para oferecer fácil acesso aos alunos de todas as regiões de Itu, proporcionando um ambiente seguro e tranquilo, ideal para o foco e o aprendizado. Diferente de escolas situadas em zonas de trânsito intenso, nossa unidade na Rua Bahia permite um desembarque seguro para os pais e alunos, facilitando a rotina escolar."
+          question: "Onde a Tic Tac School está localizada e como é a estrutura da escola?",
+          answer: "A Tic Tac School fica na Rua Bahia, 362, no bairro Vila Nova em Itu. Mais do que uma localização acessível, nossa escola oferece uma estrutura interna surpreendente. Diferente de escolas tradicionais com salas cinzas, nós temos toda uma estrutura para brincar dentro da escola. Contamos com brinquedões, móveis coloridos e adaptados e uma decoração temática vibrante. O ambiente foi desenhado para que o aluno se sinta dentro de um universo de aprendizado e diversão."
         },
         {
-          question: "A escola oferece estacionamento ou facilidade de acesso para quem vem de outros bairros de Itu?",
-          answer: "Sim, estar localizado na Rua Bahia, 362, em Itu, permite que pais e alunos encontrem facilidade para estacionar nas imediações da escola. Nossa estrutura foi pensada para acolher as famílias de Itu com conforto e segurança. Se você busca uma escola de inglês em Itu que combine excelência pedagógica com logística acessível, a Tic Tac School é o destino certo, evitando os congestionamentos comuns do centro da cidade."
+          question: "Por que a escola tem brinquedões e decoração diferenciada? É uma escola ou um parque?",
+          answer: "Somos uma escola de inglês séria que entende como o cérebro infantil funciona. A presença de brinquedões e a decoração lúdica não são apenas para recreio; são ferramentas pedagógicas. Aprender inglês exige baixar a ansiedade e aumentar o engajamento. Quando a criança entra em nossa estrutura na Rua Bahia e vê um ambiente acolhedor, com móveis pensados para ela, ela se abre para o aprendizado de forma natural. O espaço físico da Tic Tac School em Itu é uma extensão da sala de aula."
+        },
+        {
+          question: "A escola oferece acesso e segurança?",
+          answer: "Sim, a unidade da Rua Bahia, 362 em Itu oferece facilidade de embarque e desembarque seguro."
         },
         {
           question: "Qual é a diferença da localização da Tic Tac School em relação a outras escolas de inglês em Itu?",
