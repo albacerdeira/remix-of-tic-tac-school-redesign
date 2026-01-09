@@ -57,24 +57,12 @@ const FAQ = () => {
       title: "Metodologia e Pedagogia",
       questions: [
         {
-          question: "Como funciona o \"Aprendizado Lúdico\" mencionado pela escola? É só brincadeira?",
-          answer: "O aprendizado lúdico é o pilar central da Tic Tac School, mas é fundamentado em ciência cognitiva séria. Não acreditamos na memorização mecânica descontextualizada. Nossa metodologia utiliza jogos, vídeos, músicas e dramatizações para criar um ambiente de imersão onde o aluno vivencia o idioma. Em nossa unidade em Itu, as salas de aula funcionam como laboratórios de interação. O \"brincar\" é uma estratégia para baixar o filtro afetivo do aluno, reduzindo a ansiedade e facilitando a absorção natural da gramática e do vocabulário, conforme preconizam as mais modernas teorias de aquisição de linguagem."
+          question: "Como funciona o \"Aprendizado Lúdico\" com essa estrutura?",
+          answer: "O aprendizado lúdico na Tic Tac School não é ficar sentado ouvindo música. É movimento. Nossos professores utilizam os brinquedões e a decoração como cenários para as aulas. Imagine aprender preposições (\"in\", \"on\", \"under\") subindo e descendo de um brinquedo real, ou aprendendo cores e adjetivos interagindo com nossa mobília temática. Em nossa unidade em Itu, o inglês é vivenciado com o corpo todo."
         },
         {
-          question: "Como o material próprio apoia o \"Aprendizado Lúdico\"?",
-          answer: "A grande vantagem de ter material didático próprio é que ele foi criado para \"conversar\" com nossas aulas. Se a aula da semana envolve uma dramatização ou um jogo, a apostila traz o suporte exato para essa atividade. Não precisamos adaptar um livro rígido para ser divertido; nosso material já nasce lúdico. Isso cria uma conexão fluida entre o que está no papel e a vivência em sala de aula na nossa unidade em Itu."
-        },
-        {
-          question: "A escola aceita alunos de quais idades? Existe material didático específico para crianças pequenas?",
-          answer: "Atendemos diversas faixas etárias, desde a primeira infância até adultos. Compreendemos que o cérebro aprende de formas diferentes em cada estágio da vida, e por isso cada grupo possui um material didático desenhado especificamente para seu desenvolvimento cognitivo:\n\n• Kids: O material escolar é rico em estímulos visuais, tátil e focado na oralidade. As aulas envolvem storytelling (contação de histórias) e jogos de movimento.\n\n• Teens e Adults: O material didático foca em temas contemporâneos, pensamento crítico, gramática contextualizada e situações reais de uso da língua (viagens, trabalho, exames), preparando o aluno para o mundo globalizado."
-        },
-        {
-          question: "Meu filho vai misturar o português com o inglês? Como a escola lida com isso?",
-          answer: "Esta é uma dúvida comum, mas pesquisas mostram que o cérebro bilíngue é perfeitamente capaz de separar os idiomas. Na Tic Tac School, nossos professores utilizam técnicas para minimizar a tradução mental. O material didático é estruturado para ensinar o inglês em inglês, associando palavras diretamente a conceitos e imagens, e não às suas traduções em português. Isso estimula o pensamento direto na segunda língua. O uso ocasional da língua materna é natural no início, mas nossa metodologia guia o aluno suavemente para a produção autônoma em inglês."
-        },
-        {
-          question: "Qual é a qualificação dos professores da unidade de Itu?",
-          answer: "Nossos professores não são apenas fluentes no idioma; são educadores treinados na metodologia exclusiva da Tic Tac School. Eles passam por capacitação contínua para maximizar o uso do material didático e manter o engajamento dos alunos. Diferente de plataformas impessoais, na nossa unidade em Itu, o professor atua como um mentor próximo, conhecendo as dificuldades e potenciais de cada aluno individualmente."
+          question: "A estrutura é adequada para todas as idades?",
+          answer: "Sim. Temos ambientes pensados para diferentes estágios.\n\n• Kids: Aproveitam intensamente os brinquedões e a área lúdica para desenvolvimento motor e linguístico simultâneo.\n\n• Teens: Utilizam espaços com móveis modernos e decoração descontraída que favorecem a socialização e a conversação, fugindo do formato rígido escolar."
         }
       ]
     },
