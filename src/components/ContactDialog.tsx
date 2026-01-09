@@ -85,7 +85,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       }
 
       // Redirect to WhatsApp
-      const whatsappNumber = "5511947764601";
+      const whatsappNumber = "5511916396965";
       const message = encodeURIComponent("Quero me matricular");
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
       
