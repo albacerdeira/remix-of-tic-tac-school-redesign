@@ -15,7 +15,7 @@ const FAQ = () => {
       questions: [
         {
           question: "Onde a Tic Tac School está localizada e como é a estrutura da escola?",
-          answer: "A Tic Tac School fica na Rua Bahia, 362, no bairro Vila Nova em Itu. Mais do que uma localização acessível, nossa escola oferece uma estrutura interna surpreendente. Diferente de escolas tradicionais com salas cinzas, nós temos toda uma estrutura para brincar dentro da escola. Contamos com brinquedões, móveis coloridos e adaptados e uma decoração temática vibrante. O ambiente foi desenhado para que o aluno se sinta dentro de um universo de aprendizado e diversão."
+          answer: "A Tic Tac School fica na Rua Bahia, 362, no bairro Brasil em Itu. Mais do que uma localização acessível, nossa escola oferece uma estrutura interna surpreendente. Diferente de escolas tradicionais com salas cinzas, nós temos toda uma estrutura para brincar dentro da escola. Contamos com brinquedões, móveis coloridos e adaptados e uma decoração temática vibrante. O ambiente foi desenhado para que o aluno se sinta dentro de um universo de aprendizado e diversão."
         },
         {
           question: "Por que a escola tem brinquedões e decoração diferenciada? É uma escola ou um parque?",
