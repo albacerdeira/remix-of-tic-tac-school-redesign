@@ -52,6 +52,33 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PH6S5WWK');</script>
   <!-- End Google Tag Manager -->
+
+  <!-- Google Ads Event Snippet Helper -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion_event_contact', {
+          'event_callback': callback,
+          'event_timeout': 2000
+        });
+      } else if (typeof url === 'string') {
+        window.location = url;
+      }
+      return false;
+    }
+    
+    function gtagSendContactEvent() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion_event_contact');
+      }
+    }
+  </script>
+  <!-- End Google Ads Event Snippet -->
   
   <!-- Meta Pixel Code -->
   <script>
