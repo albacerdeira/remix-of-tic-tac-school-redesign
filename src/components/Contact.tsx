@@ -79,6 +79,11 @@ const Contact = () => {
         return;
       }
 
+      // Dispara evento de conversão do Google Ads
+      if (typeof (window as any).gtagSendContactEvent === 'function') {
+        (window as any).gtagSendContactEvent();
+      }
+
       toast({
         title: "Enviado com sucesso!",
         description: "Entraremos em contato em breve.",
@@ -282,7 +287,17 @@ const Contact = () => {
                   </p>
                 </div>
                 <Button asChild variant="outline" className="w-full">
-                  <a href={info.href} target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href={info.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      // Dispara evento de conversão do Google Ads
+                      if (typeof (window as any).gtagSendContactEvent === 'function') {
+                        (window as any).gtagSendContactEvent();
+                      }
+                    }}
+                  >
                     Contatar
                   </a>
                 </Button>

@@ -84,6 +84,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         return;
       }
 
+      // Dispara evento de conversão do Google Ads
+      if (typeof (window as any).gtagSendContactEvent === 'function') {
+        (window as any).gtagSendContactEvent();
+      }
+
       // Redirect to WhatsApp
       const whatsappNumber = "5511916396965";
       const message = encodeURIComponent("Quero me matricular");
