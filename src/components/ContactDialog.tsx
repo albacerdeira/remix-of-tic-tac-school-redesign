@@ -86,7 +86,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
 
       // Dispara evento de conversão do Google Ads
       if (typeof (window as any).gtagSendContactEvent === 'function') {
-        (window as any).gtagSendContactEvent();
+        (window as any).gtagSendContactEvent('form_submit');
       }
 
       // Redirect to WhatsApp

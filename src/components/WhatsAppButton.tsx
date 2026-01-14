@@ -30,9 +30,8 @@ const WhatsAppButton = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    // Dispara evento de conversão do Google Ads
     if (typeof (window as any).gtagSendContactEvent === 'function') {
-      (window as any).gtagSendContactEvent();
+      (window as any).gtagSendContactEvent('whatsapp_click');
     }
   };
 

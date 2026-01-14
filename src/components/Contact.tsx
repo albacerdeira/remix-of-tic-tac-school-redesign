@@ -81,7 +81,7 @@ const Contact = () => {
 
       // Dispara evento de conversão do Google Ads
       if (typeof (window as any).gtagSendContactEvent === 'function') {
-        (window as any).gtagSendContactEvent();
+        (window as any).gtagSendContactEvent('form_submit');
       }
 
       toast({
@@ -292,9 +292,10 @@ const Contact = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                     onClick={() => {
-                      // Dispara evento de conversão do Google Ads
                       if (typeof (window as any).gtagSendContactEvent === 'function') {
-                        (window as any).gtagSendContactEvent();
+                        const eventType = info.label === 'Telefone' ? 'phone_click' : 
+                                         info.label === 'Email' ? 'email_click' : 'location_click';
+                        (window as any).gtagSendContactEvent(eventType);
                       }
                     }}
                   >

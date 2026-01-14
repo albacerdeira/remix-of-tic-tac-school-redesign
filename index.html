@@ -72,9 +72,10 @@
       return false;
     }
     
-    function gtagSendContactEvent() {
+    function gtagSendContactEvent(eventType) {
       if (typeof gtag === 'function') {
-        gtag('event', 'conversion_event_contact');
+        var eventName = eventType || 'conversion_event_contact';
+        gtag('event', eventName);
       }
     }
   </script>
