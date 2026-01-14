@@ -15,7 +15,7 @@ const InstitutionalVideo = () => {
         <div className="max-w-4xl mx-auto">
           <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl" style={{ paddingBottom: '56.25%' }}>
             <iframe
-              src="https://www.youtube.com/embed/U0OYlZaFV9c"
+              src="https://www.youtube.com/embed/U0OYlZaFV9c?rel=0&modestbranding=1&hd=1"
               title="Vídeo Institucional Tic Tac School"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
