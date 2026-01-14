@@ -42,10 +42,6 @@ const FAQ = () => {
         {
           question: "A lista de material escolar é extensa?",
           answer: "Não. Como temos material próprio e uma escola totalmente equipada com jogos e brinquedos educativos, a família não precisa comprar itens caros. A lista de material escolar resume-se a itens de uso pessoal. A \"tecnologia\" de brincar (a estrutura física) já é fornecida pela Tic Tac School."
-        },
-        {
-          question: "Existe confusão com os livros \"Tic Tac\" da Editora do Brasil?",
-          answer: "Nosso material didático é exclusivo da Tic Tac School de Itu e não tem vínculo com a Editora do Brasil. Ele é feito sob medida para nossos alunos e para nossa metodologia que utiliza a infraestrutura lúdica da escola como suporte de ensino."
         }
       ]
     },
