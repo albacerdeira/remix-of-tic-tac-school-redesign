@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { trackClick } from "@/hooks/useClickTracking";
 
 const WhatsAppButton = () => {
   const [bottomOffset, setBottomOffset] = useState(24);
@@ -30,6 +31,7 @@ const WhatsAppButton = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
+    trackClick('whatsapp_float');
     if (typeof (window as any).gtagSendContactEvent === 'function') {
       (window as any).gtagSendContactEvent('whatsapp_click');
     }

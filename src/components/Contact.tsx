@@ -11,6 +11,7 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { trackClick, LinkType } from "@/hooks/useClickTracking";
 
 
 const formSchema = z.object({
@@ -79,6 +80,10 @@ const Contact = () => {
         return;
       }
 
+      // Track form submission
+      trackClick('form_enrollment');
+      trackClick('whatsapp_form');
+      
       // Dispara evento de conversão do Google Ads
       if (typeof (window as any).gtagSendContactEvent === 'function') {
         (window as any).gtagSendContactEvent('form_submit');
@@ -292,6 +297,9 @@ const Contact = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                     onClick={() => {
+                      const linkType: LinkType = info.label === 'Telefone' ? 'phone' : 
+                                       info.label === 'Email' ? 'email' : 'location';
+                      trackClick(linkType);
                       if (typeof (window as any).gtagSendContactEvent === 'function') {
                         const eventType = info.label === 'Telefone' ? 'phone_click' : 
                                          info.label === 'Email' ? 'email_click' : 'location_click';
@@ -346,6 +354,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram da Tic Tac School"
+                    onClick={() => trackClick('instagram')}
                     className="flex items-center gap-2"
                   >
                     <Instagram className="w-5 h-5" />
