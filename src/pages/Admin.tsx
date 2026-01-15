@@ -24,7 +24,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { LogOut, Trash2, Users, GraduationCap, RefreshCw } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { LogOut, Trash2, Users, GraduationCap, RefreshCw, MousePointerClick } from "lucide-react";
 import logoTicTac from "@/assets/logo-tic-tac.png";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -47,11 +48,17 @@ interface EnrollmentInquiry {
   created_at: string;
 }
 
+interface ClickStats {
+  link_type: string;
+  count: number;
+}
+
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [enrollments, setEnrollments] = useState<EnrollmentInquiry[]>([]);
+  const [clickStats, setClickStats] = useState<ClickStats[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -89,13 +96,27 @@ const Admin = () => {
   const fetchData = async () => {
     setIsLoadingData(true);
     try {
-      const [contactsRes, enrollmentsRes] = await Promise.all([
+      const [contactsRes, enrollmentsRes, clicksRes] = await Promise.all([
         supabase.from("contacts").select("*").order("created_at", { ascending: false }),
         supabase.from("enrollment_inquiries").select("*").order("created_at", { ascending: false }),
+        supabase.from("contact_clicks").select("link_type"),
       ]);
 
       if (contactsRes.data) setContacts(contactsRes.data);
       if (enrollmentsRes.data) setEnrollments(enrollmentsRes.data);
+      
+      // Aggregate click counts
+      if (clicksRes.data) {
+        const counts: Record<string, number> = {};
+        clicksRes.data.forEach((click) => {
+          counts[click.link_type] = (counts[click.link_type] || 0) + 1;
+        });
+        const stats = Object.entries(counts).map(([link_type, count]) => ({
+          link_type,
+          count,
+        })).sort((a, b) => b.count - a.count);
+        setClickStats(stats);
+      }
     } catch (error) {
       toast({
         title: "Erro ao carregar dados",
@@ -191,8 +212,12 @@ const Admin = () => {
           </Button>
         </div>
 
-        <Tabs defaultValue="contacts" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+        <Tabs defaultValue="clicks" className="space-y-6">
+          <TabsList className="grid w-full max-w-lg grid-cols-3">
+            <TabsTrigger value="clicks" className="flex items-center gap-2">
+              <MousePointerClick className="h-4 w-4" />
+              Cliques
+            </TabsTrigger>
             <TabsTrigger value="contacts" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
               Contatos ({contacts.length})
@@ -202,6 +227,33 @@ const Admin = () => {
               Matrículas ({enrollments.length})
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="clicks">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {clickStats.length === 0 ? (
+                <div className="col-span-full p-8 text-center text-muted-foreground bg-card rounded-lg border">
+                  Nenhum clique registrado ainda.
+                </div>
+              ) : (
+                clickStats.map((stat) => (
+                  <Card key={stat.link_type} className="p-4">
+                    <div className="flex flex-col">
+                      <span className="text-sm text-muted-foreground capitalize">
+                        {stat.link_type.replace(/_/g, ' ')}
+                      </span>
+                      <span className="text-3xl font-bold text-primary">{stat.count}</span>
+                      <span className="text-xs text-muted-foreground">cliques</span>
+                    </div>
+                  </Card>
+                ))
+              )}
+            </div>
+            <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+              <p className="text-sm text-muted-foreground">
+                <strong>Total de cliques:</strong> {clickStats.reduce((sum, s) => sum + s.count, 0)}
+              </p>
+            </div>
+          </TabsContent>
 
           <TabsContent value="contacts">
             <div className="bg-card rounded-lg border">

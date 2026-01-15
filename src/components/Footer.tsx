@@ -1,5 +1,6 @@
 import { Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
+import { trackClick } from "@/hooks/useClickTracking";
 
 const Footer = () => {
   const scrollToSection = (id: string) => {
@@ -67,6 +68,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary flex items-center justify-center transition-colors"
                 aria-label="Instagram"
+                onClick={() => trackClick('instagram')}
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -76,6 +78,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-secondary flex items-center justify-center transition-colors"
                 aria-label="Facebook"
+                onClick={() => trackClick('facebook')}
               >
                 <Facebook className="w-5 h-5" />
               </a>

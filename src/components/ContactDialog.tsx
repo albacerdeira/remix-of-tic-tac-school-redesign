@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
+import { trackClick } from "@/hooks/useClickTracking";
 const contactSchema = z.object({
   name: z
     .string()
@@ -84,6 +84,10 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         return;
       }
 
+      // Track form submission
+      trackClick('form_contact');
+      trackClick('whatsapp_form');
+      
       // Dispara evento de conversão do Google Ads
       if (typeof (window as any).gtagSendContactEvent === 'function') {
         (window as any).gtagSendContactEvent('form_submit');
