@@ -19,14 +19,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
+          <Route path="/" element={<><Index /><CookieBanner /></>} />
+          <Route path="/politica-de-privacidade" element={<><PoliticaDePrivacidade /><CookieBanner /></>} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/auth" element={<AdminAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <CookieBanner />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
