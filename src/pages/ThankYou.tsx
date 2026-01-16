@@ -46,7 +46,7 @@ const ThankYou = () => {
         </div>
         
         <p className="text-sm text-muted-foreground">
-          Dúvidas? Entre em contato pelo WhatsApp: (11) 4023-2580
+          Dúvidas? Entre em contato pelo WhatsApp: (11) 91639-6965
         </p>
       </div>
     </div>
