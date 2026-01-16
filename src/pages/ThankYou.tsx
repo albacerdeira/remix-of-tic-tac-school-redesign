@@ -8,6 +8,29 @@ const ThankYou = () => {
   useEffect(() => {
     // Scroll to top when page loads
     window.scrollTo(0, 0);
+    
+    // Disparar evento de conversão do Google Ads
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL', // Substitua pelos seus IDs do Google Ads
+        'event_callback': () => {
+          console.log('Google Ads conversion tracked');
+        }
+      });
+    }
+    
+    // Disparar evento genérico de conversão via GTM dataLayer
+    if (typeof (window as any).dataLayer !== 'undefined') {
+      (window as any).dataLayer.push({
+        'event': 'lead_conversion',
+        'page_type': 'thank_you'
+      });
+    }
+
+    // Disparar evento usando a função auxiliar existente
+    if (typeof (window as any).gtagSendContactEvent === 'function') {
+      (window as any).gtagSendContactEvent('lead_form_submit');
+    }
   }, []);
 
   return (
