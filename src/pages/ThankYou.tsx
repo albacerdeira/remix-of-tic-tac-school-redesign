@@ -46,7 +46,15 @@ const ThankYou = () => {
         </div>
         
         <p className="text-sm text-muted-foreground">
-          Dúvidas? Entre em contato pelo WhatsApp: (11) 91639-6965
+          Dúvidas? Entre em contato pelo{" "}
+          <a 
+            href="https://api.whatsapp.com/send?phone=5511916396965" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-medium"
+          >
+            WhatsApp: (11) 91639-6965
+          </a>
         </p>
       </div>
     </div>
