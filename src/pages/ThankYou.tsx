@@ -31,6 +31,11 @@ const ThankYou = () => {
     if (typeof (window as any).gtagSendContactEvent === 'function') {
       (window as any).gtagSendContactEvent('lead_form_submit');
     }
+
+    // Disparar evento Lead do Meta Pixel (Facebook)
+    if (typeof (window as any).fbq === 'function') {
+      (window as any).fbq('track', 'Lead');
+    }
   }, []);
 
   return (
