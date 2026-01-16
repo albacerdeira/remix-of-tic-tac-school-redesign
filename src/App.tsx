@@ -8,6 +8,7 @@ import PoliticaDePrivacidade from "./pages/PoliticaDePrivacidade";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import AdminAuth from "./pages/AdminAuth";
+import ThankYou from "./pages/ThankYou";
 import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<><Index /><CookieBanner /></>} />
           <Route path="/politica-de-privacidade" element={<><PoliticaDePrivacidade /><CookieBanner /></>} />
+          <Route path="/obrigado" element={<ThankYou />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/auth" element={<AdminAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
