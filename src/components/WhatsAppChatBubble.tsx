@@ -49,7 +49,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
-          type: "whatsapp_chat",
+          type: "contact",
           name: formData.name,
           phone: formData.phone,
           email: "",
@@ -62,6 +62,8 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
   };
 
   const onSubmit = async (data: ContactFormData) => {
+    // Prevent popup blockers: open the tab synchronously before any await.
+    const popup = window.open("about:blank", "_blank");
     setIsSubmitting(true);
 
     try {
@@ -79,6 +81,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
       }
 
       if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Limite atingido",
           description: "Você já enviou muitos contatos. Tente novamente mais tarde.",
@@ -88,6 +91,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
       }
 
       if (response?.code === "VALIDATION_ERROR") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Erro de validação",
           description: response.error || "Verifique os dados informados.",
@@ -111,8 +115,14 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
       
       if (typeof (window as any).gtagReportConversionContact1 === 'function') {
         (window as any).gtagReportConversionContact1(whatsappUrl);
+      }
+
+      if (popup) {
+        popup.location.href = whatsappUrl;
+        popup.focus();
       } else {
-        window.open(whatsappUrl, "_blank");
+        // Fallback when popups are blocked
+        window.location.href = whatsappUrl;
       }
       
       reset();
@@ -123,6 +133,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
         description: "Redirecionando para o WhatsApp...",
       });
     } catch (error) {
+      if (popup && !popup.closed) popup.close();
       if (import.meta.env.DEV) {
         console.error("Error saving contact:", error);
       }
