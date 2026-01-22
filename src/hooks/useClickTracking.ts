@@ -1,6 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export type LinkType = 
+  | 'whatsapp'
   | 'whatsapp_float' 
   | 'whatsapp_form' 
   | 'whatsapp_chat_form'
