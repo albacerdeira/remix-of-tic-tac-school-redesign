@@ -43,6 +43,25 @@ const Contact = () => {
 
   const courseFor = watch("courseFor");
 
+  const sendToSheets = async (formData: FormData) => {
+    try {
+      await supabase.functions.invoke("send-to-sheets", {
+        body: {
+          timestamp: new Date().toISOString(),
+          type: "enrollment",
+          name: formData.fullName,
+          phone: formData.whatsapp,
+          email: formData.email || "",
+          courseFor: formData.courseFor === "adult" ? "Adulto" : "Criança/Teen",
+          childAge: formData.childAge,
+          pageUrl: window.location.href,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending to sheets:", error);
+    }
+  };
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
@@ -79,6 +98,9 @@ const Contact = () => {
         });
         return;
       }
+
+      // Send to Google Sheets (non-blocking)
+      sendToSheets(data);
 
       // Track form submission
       trackClick('form_enrollment');
