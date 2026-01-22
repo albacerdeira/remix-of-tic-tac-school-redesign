@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,7 +14,21 @@ import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+// Persist gclid from URL to localStorage for later use
+const useGclidPersistence = () => {
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const gclid = urlParams.get('gclid');
+    if (gclid) {
+      localStorage.setItem('gclid', gclid);
+    }
+  }, []);
+};
+
+const App = () => {
+  useGclidPersistence();
+  
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -31,6 +46,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;

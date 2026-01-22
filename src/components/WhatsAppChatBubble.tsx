@@ -44,6 +44,11 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
     mode: "onChange",
   });
 
+  const getGclid = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
+  };
+
   const sendToSheets = async (formData: ContactFormData) => {
     try {
       await supabase.functions.invoke("send-to-sheets", {
@@ -54,6 +59,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
           phone: formData.phone,
           email: "",
           pageUrl: window.location.href,
+          gclid: getGclid(),
         },
       });
     } catch (error) {

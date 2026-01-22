@@ -43,6 +43,11 @@ const Contact = () => {
 
   const courseFor = watch("courseFor");
 
+  const getGclid = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
+  };
+
   const sendToSheets = async (formData: FormData) => {
     try {
       await supabase.functions.invoke("send-to-sheets", {
@@ -55,6 +60,7 @@ const Contact = () => {
           courseFor: formData.courseFor === "adult" ? "Adulto" : "Criança/Teen",
           childAge: formData.childAge,
           pageUrl: window.location.href,
+          gclid: getGclid(),
         },
       });
     } catch (error) {
