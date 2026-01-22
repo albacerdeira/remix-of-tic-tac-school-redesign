@@ -63,6 +63,8 @@ const Contact = () => {
   };
 
   const onSubmit = async (data: FormData) => {
+    // Prevent popup blockers: open the tab synchronously before any await.
+    const popup = window.open("about:blank", "_blank");
     setIsSubmitting(true);
     try {
       // Use rate-limited edge function
@@ -82,6 +84,7 @@ const Contact = () => {
       }
 
       if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Limite atingido",
           description: "Você já enviou muitas solicitações. Tente novamente mais tarde.",
@@ -91,6 +94,7 @@ const Contact = () => {
       }
 
       if (response?.code === "VALIDATION_ERROR") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Erro de validação",
           description: response.error || "Verifique os dados informados.",
@@ -125,13 +129,19 @@ const Contact = () => {
       // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
       if (typeof (window as any).gtagReportConversionContact1 === 'function') {
         (window as any).gtagReportConversionContact1(whatsappUrl);
+      }
+
+      if (popup) {
+        popup.location.href = whatsappUrl;
+        popup.focus();
       } else {
-        window.open(whatsappUrl, "_blank");
+        window.location.href = whatsappUrl;
       }
 
       reset();
       setShowAgeInput(false);
     } catch (error) {
+      if (popup && !popup.closed) popup.close();
       if (import.meta.env.DEV) {
         console.error("Error:", error);
       }
