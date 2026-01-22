@@ -1,11 +1,11 @@
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { trackClick } from "@/hooks/useClickTracking";
-import ContactDialog from "./ContactDialog";
+import WhatsAppChatBubble from "./WhatsAppChatBubble";
 
 const WhatsAppButton = () => {
   const [bottomOffset, setBottomOffset] = useState(24);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,7 +14,6 @@ const WhatsAppButton = () => {
 
       const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const buttonHeight = 56;
       const minBottom = 24;
 
       if (footerRect.top < windowHeight) {
@@ -36,11 +35,16 @@ const WhatsAppButton = () => {
     if (typeof (window as any).gtagSendContactEvent === 'function') {
       (window as any).gtagSendContactEvent('whatsapp_click');
     }
-    setIsDialogOpen(true);
+    setIsChatOpen(!isChatOpen);
   };
 
   return (
     <>
+      <WhatsAppChatBubble 
+        open={isChatOpen} 
+        onOpenChange={setIsChatOpen} 
+        bottomOffset={bottomOffset}
+      />
       <button
         onClick={handleWhatsAppClick}
         style={{ bottom: `${bottomOffset}px` }}
@@ -49,7 +53,6 @@ const WhatsAppButton = () => {
       >
         <MessageCircle className="w-7 h-7" />
       </button>
-      <ContactDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </>
   );
 };
