@@ -48,6 +48,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     mode: "onChange",
   });
 
+  const getGclid = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
+  };
+
   const sendToSheets = async (formData: ContactFormData) => {
     try {
       await supabase.functions.invoke("send-to-sheets", {
@@ -58,6 +63,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           phone: formData.phone,
           email: formData.email,
           pageUrl: window.location.href,
+          gclid: getGclid(),
         },
       });
     } catch (error) {

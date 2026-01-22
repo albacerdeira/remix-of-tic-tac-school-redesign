@@ -7,13 +7,14 @@ const corsHeaders = {
 
 interface SheetData {
   timestamp: string;
-  type: "contact" | "enrollment";
+  type: "contact" | "enrollment" | "whatsapp";
   name: string;
   phone: string;
   email?: string;
   courseFor?: string;
   childAge?: number;
   pageUrl?: string;
+  gclid?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -47,6 +48,7 @@ const handler = async (req: Request): Promise<Response> => {
         courseFor: data.courseFor || "",
         childAge: data.childAge || "",
         pageUrl: data.pageUrl || "",
+        gclid: data.gclid || "",
       }),
     });
 
