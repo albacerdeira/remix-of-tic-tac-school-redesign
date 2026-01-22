@@ -104,7 +104,7 @@ function validateEnrollmentInput(data: any): { valid: boolean; error?: string } 
 }
 
 interface ContactData {
-  type: "contact";
+  type: "contact" | "whatsapp_chat";
   name: string;
   phone: string;
   email: string;
@@ -156,7 +156,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Validate input based on type
     let validation: { valid: boolean; error?: string };
-    if (data.type === "contact") {
+    if (data.type === "contact" || data.type === "whatsapp_chat") {
       validation = validateContactInput(data);
     } else if (data.type === "enrollment") {
       validation = validateEnrollmentInput(data);
@@ -181,23 +181,25 @@ const handler = async (req: Request): Promise<Response> => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Insert into database
-    if (data.type === "contact") {
+    if (data.type === "contact" || data.type === "whatsapp_chat") {
+      const contactData = data as ContactData;
       const { error } = await supabase.from("contacts").insert({
-        name: data.name.trim(),
-        phone: data.phone.trim(),
-        email: data.email.trim(),
+        name: contactData.name.trim(),
+        phone: contactData.phone.trim(),
+        email: contactData.email.trim(),
       });
       if (error) {
         console.error("Database error:", error);
         throw new Error("Erro ao salvar dados");
       }
-    } else {
+    } else if (data.type === "enrollment") {
+      const enrollmentData = data as EnrollmentData;
       const { error } = await supabase.from("enrollment_inquiries").insert({
-        full_name: data.fullName.trim(),
-        whatsapp: data.whatsapp.trim(),
-        email: data.email?.trim() || null,
-        course_for: data.courseFor,
-        child_age: data.courseFor === "child" ? data.childAge : null,
+        full_name: enrollmentData.fullName.trim(),
+        whatsapp: enrollmentData.whatsapp.trim(),
+        email: enrollmentData.email?.trim() || null,
+        course_for: enrollmentData.courseFor,
+        child_age: enrollmentData.courseFor === "child" ? enrollmentData.childAge : null,
       });
       if (error) {
         console.error("Database error:", error);
@@ -246,17 +248,19 @@ async function sendEmailNotification(data: SubmissionData, apiKey: string) {
   let subject: string;
   let htmlContent: string;
 
-  if (data.type === "contact") {
-    subject = `🎓 Novo Contato - ${data.name}`;
+  if (data.type === "contact" || data.type === "whatsapp_chat") {
+    const contactData = data as ContactData;
+    const typeLabel = data.type === "whatsapp_chat" ? "Chat WhatsApp" : "Contato";
+    subject = `🎓 Novo ${typeLabel} - ${contactData.name}`;
     htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h1 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
-          📞 Novo Contato Recebido
+          📞 Novo ${typeLabel} Recebido
         </h1>
         <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <p style="margin: 10px 0;"><strong>Nome:</strong> ${data.name}</p>
-          <p style="margin: 10px 0;"><strong>Telefone:</strong> ${data.phone}</p>
-          <p style="margin: 10px 0;"><strong>Email:</strong> ${data.email}</p>
+          <p style="margin: 10px 0;"><strong>Nome:</strong> ${contactData.name}</p>
+          <p style="margin: 10px 0;"><strong>Telefone:</strong> ${contactData.phone}</p>
+          <p style="margin: 10px 0;"><strong>Email:</strong> ${contactData.email}</p>
         </div>
         <p style="color: #6b7280; font-size: 12px;">
           Este contato foi recebido através do site Tic Tac English School.
@@ -264,19 +268,20 @@ async function sendEmailNotification(data: SubmissionData, apiKey: string) {
       </div>
     `;
   } else {
-    subject = `📚 Nova Matrícula - ${data.fullName}`;
-    const courseType = data.courseFor === "adult" ? "Adulto" : "Criança";
+    const enrollmentData = data as EnrollmentData;
+    subject = `📚 Nova Matrícula - ${enrollmentData.fullName}`;
+    const courseType = enrollmentData.courseFor === "adult" ? "Adulto" : "Criança";
     htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h1 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
           📚 Nova Solicitação de Matrícula
         </h1>
         <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <p style="margin: 10px 0;"><strong>Nome:</strong> ${data.fullName}</p>
-          <p style="margin: 10px 0;"><strong>WhatsApp:</strong> ${data.whatsapp}</p>
-          <p style="margin: 10px 0;"><strong>Email:</strong> ${data.email || "Não informado"}</p>
+          <p style="margin: 10px 0;"><strong>Nome:</strong> ${enrollmentData.fullName}</p>
+          <p style="margin: 10px 0;"><strong>WhatsApp:</strong> ${enrollmentData.whatsapp}</p>
+          <p style="margin: 10px 0;"><strong>Email:</strong> ${enrollmentData.email || "Não informado"}</p>
           <p style="margin: 10px 0;"><strong>Curso para:</strong> ${courseType}</p>
-          ${data.childAge ? `<p style="margin: 10px 0;"><strong>Idade da criança:</strong> ${data.childAge} anos</p>` : ""}
+          ${enrollmentData.childAge ? `<p style="margin: 10px 0;"><strong>Idade da criança:</strong> ${enrollmentData.childAge} anos</p>` : ""}
         </div>
         <p style="color: #6b7280; font-size: 12px;">
           Esta solicitação foi recebida através do site Tic Tac English School.
