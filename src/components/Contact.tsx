@@ -124,7 +124,7 @@ const Contact = () => {
       const whatsappMessage = encodeURIComponent(
         `Olá! Gostaria de me matricular. Meu nome é ${data.fullName}.`
       );
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=5511916396965&text=${whatsappMessage}`;
+      const whatsappUrl = `https://wa.me/5511916396965?text=${whatsappMessage}`;
       
       // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
       if (typeof (window as any).gtagReportConversionContact1 === 'function') {
@@ -135,7 +135,11 @@ const Contact = () => {
         popup.location.href = whatsappUrl;
         popup.focus();
       } else {
-        window.location.href = whatsappUrl;
+        toast({
+          title: "Não foi possível abrir o WhatsApp",
+          description: "Seu navegador bloqueou a nova aba. Permita pop-ups e envie novamente.",
+          variant: "destructive",
+        });
       }
 
       reset();
