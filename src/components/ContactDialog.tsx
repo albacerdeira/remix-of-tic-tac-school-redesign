@@ -48,6 +48,23 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     mode: "onChange",
   });
 
+  const sendToSheets = async (formData: ContactFormData) => {
+    try {
+      await supabase.functions.invoke("send-to-sheets", {
+        body: {
+          timestamp: new Date().toISOString(),
+          type: "contact",
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          pageUrl: window.location.href,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending to sheets:", error);
+    }
+  };
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
 
@@ -83,6 +100,9 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         });
         return;
       }
+
+      // Send to Google Sheets (non-blocking)
+      sendToSheets(data);
 
       // Track form submission
       trackClick('form_contact');
