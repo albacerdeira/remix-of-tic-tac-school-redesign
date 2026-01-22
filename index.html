@@ -78,6 +78,24 @@
         gtag('event', eventName);
       }
     }
+
+    // Evento de conversão de contato via WhatsApp
+    function gtagReportConversionContact1(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.open(url, '_blank');
+        }
+      };
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion_event_contact_1', {
+          'event_callback': callback,
+          'event_timeout': 2000
+        });
+      } else if (typeof url === 'string') {
+        window.open(url, '_blank');
+      }
+      return false;
+    }
   </script>
   <!-- End Google Ads Event Snippet -->
   

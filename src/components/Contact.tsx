@@ -94,14 +94,18 @@ const Contact = () => {
         description: "Entraremos em contato em breve.",
       });
 
-      // Redirect to WhatsApp
+      // Redirect to WhatsApp com evento de conversão
       const whatsappMessage = encodeURIComponent(
         `Olá! Gostaria de me matricular. Meu nome é ${data.fullName}.`
       );
-      window.open(
-        `https://api.whatsapp.com/send?phone=5511916396965&text=${whatsappMessage}`,
-        "_blank"
-      );
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=5511916396965&text=${whatsappMessage}`;
+      
+      // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
+      if (typeof (window as any).gtagReportConversionContact1 === 'function') {
+        (window as any).gtagReportConversionContact1(whatsappUrl);
+      } else {
+        window.open(whatsappUrl, "_blank");
+      }
 
       reset();
       setShowAgeInput(false);

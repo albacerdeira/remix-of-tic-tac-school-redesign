@@ -93,12 +93,17 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         (window as any).gtagSendContactEvent('form_submit');
       }
 
-      // Redirect to WhatsApp
+      // Redirect to WhatsApp com evento de conversão
       const whatsappNumber = "5511916396965";
       const message = encodeURIComponent("Quero me matricular");
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
       
-      window.open(whatsappUrl, "_blank");
+      // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
+      if (typeof (window as any).gtagReportConversionContact1 === 'function') {
+        (window as any).gtagReportConversionContact1(whatsappUrl);
+      } else {
+        window.open(whatsappUrl, "_blank");
+      }
       
       // Reset form and close dialog
       reset();
