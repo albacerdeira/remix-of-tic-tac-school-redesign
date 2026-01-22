@@ -49,7 +49,7 @@ const WhatsAppChatBubble = ({ open, onOpenChange, bottomOffset }: WhatsAppChatBu
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
-          type: "contact",
+          type: "whatsapp",
           name: formData.name,
           phone: formData.phone,
           email: "",
