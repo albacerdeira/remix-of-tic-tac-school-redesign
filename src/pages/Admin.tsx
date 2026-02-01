@@ -53,12 +53,21 @@ interface ClickStats {
   count: number;
 }
 
+interface ClickDetail {
+  id: string;
+  link_type: string;
+  clicked_at: string;
+  page_url: string | null;
+  user_agent: string | null;
+}
+
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [enrollments, setEnrollments] = useState<EnrollmentInquiry[]>([]);
   const [clickStats, setClickStats] = useState<ClickStats[]>([]);
+  const [clickDetails, setClickDetails] = useState<ClickDetail[]>([]);
   const [isLoadingData, setIsLoadingData] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -96,14 +105,16 @@ const Admin = () => {
   const fetchData = async () => {
     setIsLoadingData(true);
     try {
-      const [contactsRes, enrollmentsRes, clicksRes] = await Promise.all([
+      const [contactsRes, enrollmentsRes, clicksRes, clickDetailsRes] = await Promise.all([
         supabase.from("contacts").select("*").order("created_at", { ascending: false }),
         supabase.from("enrollment_inquiries").select("*").order("created_at", { ascending: false }),
         supabase.from("contact_clicks").select("link_type"),
+        supabase.from("contact_clicks").select("*").order("clicked_at", { ascending: false }).limit(100),
       ]);
 
       if (contactsRes.data) setContacts(contactsRes.data);
       if (enrollmentsRes.data) setEnrollments(enrollmentsRes.data);
+      if (clickDetailsRes.data) setClickDetails(clickDetailsRes.data);
       
       // Aggregate click counts
       if (clicksRes.data) {
@@ -229,7 +240,7 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="clicks">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
               {clickStats.length === 0 ? (
                 <div className="col-span-full p-8 text-center text-muted-foreground bg-card rounded-lg border">
                   Nenhum clique registrado ainda.
@@ -248,10 +259,55 @@ const Admin = () => {
                 ))
               )}
             </div>
-            <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+            <div className="mb-4 p-4 bg-muted/50 rounded-lg">
               <p className="text-sm text-muted-foreground">
                 <strong>Total de cliques:</strong> {clickStats.reduce((sum, s) => sum + s.count, 0)}
               </p>
+            </div>
+
+            {/* Detailed click history */}
+            <h3 className="text-lg font-semibold mb-4">Histórico de Cliques (últimos 100)</h3>
+            <div className="bg-card rounded-lg border">
+              {clickDetails.length === 0 ? (
+                <div className="p-8 text-center text-muted-foreground">
+                  Nenhum clique registrado ainda.
+                </div>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Tipo</TableHead>
+                      <TableHead>Data/Hora</TableHead>
+                      <TableHead>Página</TableHead>
+                      <TableHead>Dispositivo</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {clickDetails.map((click) => (
+                      <TableRow key={click.id}>
+                        <TableCell className="font-medium capitalize">
+                          {click.link_type.replace(/_/g, ' ')}
+                        </TableCell>
+                        <TableCell className="text-sm text-muted-foreground">
+                          {formatDate(click.clicked_at)}
+                        </TableCell>
+                        <TableCell className="text-sm">
+                          {click.page_url || "-"}
+                        </TableCell>
+                        <TableCell className="text-xs text-muted-foreground max-w-[200px] truncate" title={click.user_agent || ""}>
+                          {click.user_agent ? (
+                            click.user_agent.includes("Mobile") ? "📱 Mobile" :
+                            click.user_agent.includes("Windows") ? "💻 Windows" :
+                            click.user_agent.includes("Mac") ? "🍎 Mac" :
+                            click.user_agent.includes("Linux") ? "🐧 Linux" :
+                            "🌐 Outro"
+                          ) : "-"}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </div>
           </TabsContent>
 
