@@ -58,6 +58,9 @@ const Courses = () => {
                   src={course.image} 
                   alt={course.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  width={409}
+                  height={256}
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${
                   course.color === 'primary' ? 'from-primary/80' : 'from-secondary/80'

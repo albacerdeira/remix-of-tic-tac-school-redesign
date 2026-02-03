@@ -32,7 +32,14 @@ const Hero = () => {
           <div className="flex flex-col items-center text-center mb-8 md:mb-12 space-y-4 md:space-y-6 animate-slide-in">
             <div className="relative w-full max-w-[120px] md:max-w-[180px] mx-auto">
               <div className="absolute inset-0 bg-gradient-primary rounded-3xl blur-2xl opacity-20 animate-float" />
-              <img src={logoImage} alt="Logo Tic Tac School - By Teacher Gleice" className="relative w-full h-auto rounded-2xl shadow-2xl animate-fade-in" />
+              <img 
+                src={logoImage} 
+                alt="Logo Tic Tac School - By Teacher Gleice" 
+                className="relative w-full h-auto rounded-2xl shadow-2xl animate-fade-in"
+                width={180}
+                height={181}
+                fetchPriority="high"
+              />
             </div>
             
             
