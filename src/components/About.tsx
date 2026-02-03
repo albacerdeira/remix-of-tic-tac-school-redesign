@@ -58,6 +58,9 @@ const About = () => {
                   src={feature.image} 
                   alt={feature.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  width={300}
+                  height={192}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
