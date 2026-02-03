@@ -16,7 +16,7 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-4">
               Tic Tac <span className="text-secondary">School</span>
             </h3>
-            <p className="text-primary-foreground/80">
+            <p className="text-primary-foreground/90">
               Escola de inglês com turmas pequenas e metodologia diferenciada.
             </p>
           </div>
@@ -27,7 +27,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('quemsomos')}
-                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                  className="text-primary-foreground/90 hover:text-secondary transition-colors"
                 >
                   Quem Somos
                 </button>
@@ -35,7 +35,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('cursos')}
-                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                  className="text-primary-foreground/90 hover:text-secondary transition-colors"
                 >
                   Nossos Cursos
                 </button>
@@ -43,7 +43,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('contato')}
-                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                  className="text-primary-foreground/90 hover:text-secondary transition-colors"
                 >
                   Contato
                 </button>
@@ -51,7 +51,7 @@ const Footer = () => {
               <li>
                 <Link 
                   to="/politica-de-privacidade"
-                  className="text-primary-foreground/80 hover:text-secondary transition-colors"
+                  className="text-primary-foreground/90 hover:text-secondary transition-colors"
                 >
                   Política de Privacidade
                 </Link>
@@ -86,8 +86,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/20 pt-8 text-center">
-          <p className="text-primary-foreground/60 text-sm">
+        <div className="border-t border-primary-foreground/30 pt-8 text-center">
+          <p className="text-primary-foreground/80 text-sm">
             © {new Date().getFullYear()} Tic Tac School. Todos os direitos reservados.
           </p>
         </div>
