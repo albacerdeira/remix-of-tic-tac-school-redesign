@@ -393,18 +393,18 @@ const Contact = () => {
                   asChild
                   variant="outline"
                   size="lg"
-                  className="hover:text-pink-600 transition-colors"
+                  className="hover:bg-pink-600 hover:text-white hover:border-pink-600 transition-colors"
                 >
                   <a
-                    href="https://www.instagram.com/tic.tac_school/"
+                    href="https://www.instagram.com/p/C2fiV4xLX7k/?img_index=1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Instagram da Tic Tac School"
+                    aria-label="Conheça nossa gestora no Instagram"
                     onClick={() => trackClick('instagram')}
                     className="flex items-center gap-2"
                   >
                     <Instagram className="w-5 h-5" />
-                    Siga-nos no Instagram
+                    Conheça Nossa Gestora
                   </a>
                 </Button>
               </div>
