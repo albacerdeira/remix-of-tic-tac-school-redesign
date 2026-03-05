@@ -69,12 +69,6 @@ const CookieBanner = () => {
           .
         </p>
         <div className="flex items-center gap-4 shrink-0">
-          <Link
-            to="/politica-de-privacidade"
-            className="text-background/70 text-sm hover:text-background transition-colors whitespace-nowrap"
-          >
-            Ler Política de Privacidade
-          </Link>
           <Button
             onClick={handleAccept}
             className="bg-secondary text-secondary-foreground hover:bg-secondary-light whitespace-nowrap"

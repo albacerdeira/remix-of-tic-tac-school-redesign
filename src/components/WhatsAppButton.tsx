@@ -8,24 +8,42 @@ const WhatsAppButton = () => {
   useEffect(() => {
     const handleScroll = () => {
       const footer = document.querySelector('footer');
-      if (!footer) return;
-
-      const footerRect = footer.getBoundingClientRect();
+      const cookieBanner = document.querySelector('[class*="fixed bottom-0"]');
+      const isMobile = window.innerWidth < 768;
       const windowHeight = window.innerHeight;
-      const minBottom = 24;
+      let minBottom = 24;
 
-      if (footerRect.top < windowHeight) {
-        const overlap = windowHeight - footerRect.top + minBottom;
-        setBottomOffset(Math.max(overlap, minBottom));
-      } else {
-        setBottomOffset(minBottom);
+      // On mobile, position above cookie banner if visible
+      if (isMobile && cookieBanner) {
+        const bannerRect = cookieBanner.getBoundingClientRect();
+        if (bannerRect.top < windowHeight) {
+          minBottom = windowHeight - bannerRect.top + 16;
+        }
       }
+
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        if (footerRect.top < windowHeight) {
+          const overlap = windowHeight - footerRect.top + minBottom;
+          setBottomOffset(Math.max(overlap, minBottom));
+          return;
+        }
+      }
+
+      setBottomOffset(minBottom);
     };
 
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    // Re-check periodically for cookie banner appearance
+    const interval = setInterval(handleScroll, 1000);
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      clearInterval(interval);
+    };
   }, []);
 
   const handleWhatsAppClick = () => {
@@ -50,7 +68,8 @@ const WhatsAppButton = () => {
     <button
       onClick={handleWhatsAppClick}
       style={{ bottom: `${bottomOffset}px` }}
-      className="fixed right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
+
+      className="fixed right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 md:bottom-6"
       aria-label="Contato via WhatsApp"
     >
       <MessageCircle className="w-7 h-7" />
