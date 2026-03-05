@@ -6,42 +6,40 @@ const WhatsAppButton = () => {
   const [bottomOffset, setBottomOffset] = useState(24);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const footer = document.querySelector('footer');
-      const cookieBanner = document.querySelector('[class*="fixed bottom-0"]');
+    const updatePosition = () => {
       const isMobile = window.innerWidth < 768;
       const windowHeight = window.innerHeight;
-      let minBottom = 24;
+      const footer = document.querySelector('footer');
+      const cookieBanner = document.getElementById('cookie-banner');
 
-      // On mobile, position above cookie banner if visible
+      let base = 24;
+
+      // On mobile, always sit above the cookie banner
       if (isMobile && cookieBanner) {
-        const bannerRect = cookieBanner.getBoundingClientRect();
-        if (bannerRect.top < windowHeight) {
-          minBottom = windowHeight - bannerRect.top + 16;
-        }
+        const bannerHeight = cookieBanner.getBoundingClientRect().height;
+        base = bannerHeight + 16;
       }
 
+      // If footer is in view, push above it too
       if (footer) {
         const footerRect = footer.getBoundingClientRect();
         if (footerRect.top < windowHeight) {
-          const overlap = windowHeight - footerRect.top + minBottom;
-          setBottomOffset(Math.max(overlap, minBottom));
-          return;
+          const footerOverlap = windowHeight - footerRect.top + 16;
+          base = Math.max(base, footerOverlap);
         }
       }
 
-      setBottomOffset(minBottom);
+      setBottomOffset(base);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    // Re-check periodically for cookie banner appearance
-    const interval = setInterval(handleScroll, 1000);
-    handleScroll();
+    window.addEventListener('scroll', updatePosition);
+    window.addEventListener('resize', updatePosition);
+    const interval = setInterval(updatePosition, 500);
+    updatePosition();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('scroll', updatePosition);
+      window.removeEventListener('resize', updatePosition);
       clearInterval(interval);
     };
   }, []);
