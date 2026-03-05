@@ -7,15 +7,15 @@ const WhatsAppButton = () => {
 
   useEffect(() => {
     const updatePosition = () => {
-      const isMobile = window.innerWidth < 768;
+      
       const windowHeight = window.innerHeight;
       const footer = document.querySelector('footer');
       const cookieBanner = document.getElementById('cookie-banner');
 
       let base = 24;
 
-      // On mobile, always sit above the cookie banner
-      if (isMobile && cookieBanner) {
+      // Always sit above the cookie banner on all screen sizes
+      if (cookieBanner) {
         const bannerHeight = cookieBanner.getBoundingClientRect().height;
         base = bannerHeight + 16;
       }
