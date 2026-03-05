@@ -168,7 +168,7 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Phone,
-      label: "Telefone",
+      label: "Telefone / WhatsApp",
       value: "(11) 91639-6965",
       href: "tel:+5511916396965",
     },
