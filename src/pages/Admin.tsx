@@ -398,6 +398,7 @@ const Admin = () => {
                       <TableHead>Email</TableHead>
                       <TableHead>Curso</TableHead>
                       <TableHead>Idade</TableHead>
+                      <TableHead>Origem</TableHead>
                       <TableHead>Data</TableHead>
                       <TableHead className="w-[80px]">Ações</TableHead>
                     </TableRow>
