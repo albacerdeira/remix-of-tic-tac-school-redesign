@@ -411,6 +411,9 @@ const Admin = () => {
                         <TableCell>{enrollment.email || "-"}</TableCell>
                         <TableCell>{enrollment.course_for}</TableCell>
                         <TableCell>{enrollment.child_age ? `${enrollment.child_age} anos` : "-"}</TableCell>
+                        <TableCell className="text-xs text-muted-foreground" title={enrollment.referrer || ''}>
+                          {enrollment.utm_source ? `${enrollment.utm_source}/${enrollment.utm_medium || '-'}` : enrollment.referrer ? (() => { try { return new URL(enrollment.referrer).hostname; } catch { return enrollment.referrer; } })() : '-'}
+                        </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(enrollment.created_at)}
                         </TableCell>
