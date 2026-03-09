@@ -45,6 +45,10 @@ export type Database = {
           id: string
           name: string
           phone: string
+          referrer: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
         }
         Insert: {
           created_at?: string
@@ -52,6 +56,10 @@ export type Database = {
           id?: string
           name: string
           phone: string
+          referrer?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Update: {
           created_at?: string
@@ -59,6 +67,10 @@ export type Database = {
           id?: string
           name?: string
           phone?: string
+          referrer?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }
@@ -70,6 +82,10 @@ export type Database = {
           email: string | null
           full_name: string
           id: string
+          referrer: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
           whatsapp: string
         }
         Insert: {
@@ -79,6 +95,10 @@ export type Database = {
           email?: string | null
           full_name: string
           id?: string
+          referrer?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
           whatsapp: string
         }
         Update: {
@@ -88,6 +108,10 @@ export type Database = {
           email?: string | null
           full_name?: string
           id?: string
+          referrer?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
           whatsapp?: string
         }
         Relationships: []
