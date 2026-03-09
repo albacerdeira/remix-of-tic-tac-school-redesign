@@ -332,6 +332,7 @@ const Admin = () => {
                       <TableHead>Nome</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead>Telefone</TableHead>
+                      <TableHead>Origem</TableHead>
                       <TableHead>Data</TableHead>
                       <TableHead className="w-[80px]">Ações</TableHead>
                     </TableRow>
