@@ -58,6 +58,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
 
   const sendToSheets = async (formData: ContactFormData) => {
     try {
+      const marketing = getMarketingParams();
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
@@ -66,7 +67,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           phone: formData.phone,
           email: formData.email,
           pageUrl: window.location.href,
-          gclid: getGclid(),
+          gclid: marketing.gclid,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
     } catch (error) {
