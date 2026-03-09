@@ -84,12 +84,17 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
 
     try {
       // Use rate-limited edge function
+      const marketing = getMarketingParams();
       const { data: response, error } = await supabase.functions.invoke("submit-contact", {
         body: {
           type: "contact",
           name: data.name,
           phone: data.phone,
           email: data.email,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
 

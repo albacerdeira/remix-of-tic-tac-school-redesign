@@ -37,7 +37,7 @@ const useMarketingParams = () => {
 };
 
 const App = () => {
-  useGclidPersistence();
+  useMarketingParams();
   
   return (
   <QueryClientProvider client={queryClient}>

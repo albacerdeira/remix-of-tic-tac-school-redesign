@@ -53,6 +53,7 @@ const Contact = () => {
 
   const sendToSheets = async (formData: FormData) => {
     try {
+      const marketing = getMarketingParams();
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
@@ -63,7 +64,11 @@ const Contact = () => {
           courseFor: formData.courseFor === "adult" ? "Adulto" : "Criança/Teen",
           childAge: formData.childAge,
           pageUrl: window.location.href,
-          gclid: getGclid(),
+          gclid: marketing.gclid,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
     } catch (error) {
