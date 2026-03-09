@@ -344,7 +344,7 @@ const Admin = () => {
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
                         <TableCell className="text-xs text-muted-foreground" title={contact.referrer || ''}>
-                          {contact.utm_source ? `${contact.utm_source}/${contact.utm_medium || '-'}` : contact.referrer ? new URL(contact.referrer).hostname : '-'}
+                          {contact.utm_source ? `${contact.utm_source}/${contact.utm_medium || '-'}` : contact.referrer ? (() => { try { return new URL(contact.referrer).hostname; } catch { return contact.referrer; } })() : '-'}
                         </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(contact.created_at)}
