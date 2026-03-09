@@ -48,10 +48,13 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     mode: "onChange",
   });
 
-  const getGclid = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
-  };
+  const getMarketingParams = () => ({
+    gclid: new URLSearchParams(window.location.search).get('gclid') || localStorage.getItem('gclid') || '',
+    utm_source: localStorage.getItem('utm_source') || '',
+    utm_medium: localStorage.getItem('utm_medium') || '',
+    utm_campaign: localStorage.getItem('utm_campaign') || '',
+    referrer: localStorage.getItem('referrer') || '',
+  });
 
   const sendToSheets = async (formData: ContactFormData) => {
     try {
