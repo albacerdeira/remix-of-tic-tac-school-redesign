@@ -48,13 +48,17 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     mode: "onChange",
   });
 
-  const getGclid = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
-  };
+  const getMarketingParams = () => ({
+    gclid: new URLSearchParams(window.location.search).get('gclid') || localStorage.getItem('gclid') || '',
+    utm_source: localStorage.getItem('utm_source') || '',
+    utm_medium: localStorage.getItem('utm_medium') || '',
+    utm_campaign: localStorage.getItem('utm_campaign') || '',
+    referrer: localStorage.getItem('referrer') || '',
+  });
 
   const sendToSheets = async (formData: ContactFormData) => {
     try {
+      const marketing = getMarketingParams();
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
@@ -63,7 +67,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
           phone: formData.phone,
           email: formData.email,
           pageUrl: window.location.href,
-          gclid: getGclid(),
+          gclid: marketing.gclid,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
     } catch (error) {
@@ -76,12 +84,17 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
 
     try {
       // Use rate-limited edge function
+      const marketing = getMarketingParams();
       const { data: response, error } = await supabase.functions.invoke("submit-contact", {
         body: {
           type: "contact",
           name: data.name,
           phone: data.phone,
           email: data.email,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
 

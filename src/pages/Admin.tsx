@@ -36,6 +36,10 @@ interface Contact {
   email: string;
   phone: string;
   created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
 }
 
 interface EnrollmentInquiry {
@@ -46,6 +50,10 @@ interface EnrollmentInquiry {
   course_for: string;
   child_age: number | null;
   created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
 }
 
 interface ClickStats {
@@ -324,6 +332,7 @@ const Admin = () => {
                       <TableHead>Nome</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead>Telefone</TableHead>
+                      <TableHead>Origem</TableHead>
                       <TableHead>Data</TableHead>
                       <TableHead className="w-[80px]">Ações</TableHead>
                     </TableRow>
@@ -334,6 +343,9 @@ const Admin = () => {
                         <TableCell className="font-medium">{contact.name}</TableCell>
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
+                        <TableCell className="text-xs text-muted-foreground" title={contact.referrer || ''}>
+                          {contact.utm_source ? `${contact.utm_source}/${contact.utm_medium || '-'}` : contact.referrer ? (() => { try { return new URL(contact.referrer).hostname; } catch { return contact.referrer; } })() : '-'}
+                        </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(contact.created_at)}
                         </TableCell>
@@ -386,6 +398,7 @@ const Admin = () => {
                       <TableHead>Email</TableHead>
                       <TableHead>Curso</TableHead>
                       <TableHead>Idade</TableHead>
+                      <TableHead>Origem</TableHead>
                       <TableHead>Data</TableHead>
                       <TableHead className="w-[80px]">Ações</TableHead>
                     </TableRow>
@@ -398,6 +411,9 @@ const Admin = () => {
                         <TableCell>{enrollment.email || "-"}</TableCell>
                         <TableCell>{enrollment.course_for}</TableCell>
                         <TableCell>{enrollment.child_age ? `${enrollment.child_age} anos` : "-"}</TableCell>
+                        <TableCell className="text-xs text-muted-foreground" title={enrollment.referrer || ''}>
+                          {enrollment.utm_source ? `${enrollment.utm_source}/${enrollment.utm_medium || '-'}` : enrollment.referrer ? (() => { try { return new URL(enrollment.referrer).hostname; } catch { return enrollment.referrer; } })() : '-'}
+                        </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(enrollment.created_at)}
                         </TableCell>

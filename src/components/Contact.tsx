@@ -43,13 +43,17 @@ const Contact = () => {
 
   const courseFor = watch("courseFor");
 
-  const getGclid = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('gclid') || localStorage.getItem('gclid') || '';
-  };
+  const getMarketingParams = () => ({
+    gclid: new URLSearchParams(window.location.search).get('gclid') || localStorage.getItem('gclid') || '',
+    utm_source: localStorage.getItem('utm_source') || '',
+    utm_medium: localStorage.getItem('utm_medium') || '',
+    utm_campaign: localStorage.getItem('utm_campaign') || '',
+    referrer: localStorage.getItem('referrer') || '',
+  });
 
   const sendToSheets = async (formData: FormData) => {
     try {
+      const marketing = getMarketingParams();
       await supabase.functions.invoke("send-to-sheets", {
         body: {
           timestamp: new Date().toISOString(),
@@ -60,7 +64,11 @@ const Contact = () => {
           courseFor: formData.courseFor === "adult" ? "Adulto" : "Criança/Teen",
           childAge: formData.childAge,
           pageUrl: window.location.href,
-          gclid: getGclid(),
+          gclid: marketing.gclid,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
     } catch (error) {
@@ -74,6 +82,7 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       // Use rate-limited edge function
+      const marketing = getMarketingParams();
       const { data: response, error } = await supabase.functions.invoke("submit-contact", {
         body: {
           type: "enrollment",
@@ -82,6 +91,10 @@ const Contact = () => {
           email: data.email || undefined,
           courseFor: data.courseFor,
           childAge: data.courseFor === "child" ? data.childAge : undefined,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
 

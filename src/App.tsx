@@ -14,19 +14,30 @@ import CookieBanner from "./components/CookieBanner";
 
 const queryClient = new QueryClient();
 
-// Persist gclid from URL to localStorage for later use
-const useGclidPersistence = () => {
+// Persist marketing params (gclid, UTM, referrer) to localStorage
+const useMarketingParams = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const gclid = urlParams.get('gclid');
-    if (gclid) {
-      localStorage.setItem('gclid', gclid);
+    if (gclid) localStorage.setItem('gclid', gclid);
+
+    const utmSource = urlParams.get('utm_source');
+    const utmMedium = urlParams.get('utm_medium');
+    const utmCampaign = urlParams.get('utm_campaign');
+    if (utmSource) localStorage.setItem('utm_source', utmSource);
+    if (utmMedium) localStorage.setItem('utm_medium', utmMedium);
+    if (utmCampaign) localStorage.setItem('utm_campaign', utmCampaign);
+
+    // Save referrer only once per session
+    if (document.referrer && !sessionStorage.getItem('referrer')) {
+      sessionStorage.setItem('referrer', document.referrer);
+      localStorage.setItem('referrer', document.referrer);
     }
   }, []);
 };
 
 const App = () => {
-  useGclidPersistence();
+  useMarketingParams();
   
   return (
   <QueryClientProvider client={queryClient}>
