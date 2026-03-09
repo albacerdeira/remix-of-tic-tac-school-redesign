@@ -36,6 +36,10 @@ interface Contact {
   email: string;
   phone: string;
   created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
 }
 
 interface EnrollmentInquiry {
@@ -46,6 +50,10 @@ interface EnrollmentInquiry {
   course_for: string;
   child_age: number | null;
   created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
 }
 
 interface ClickStats {
