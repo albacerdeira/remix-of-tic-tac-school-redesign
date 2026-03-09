@@ -343,6 +343,9 @@ const Admin = () => {
                         <TableCell className="font-medium">{contact.name}</TableCell>
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
+                        <TableCell className="text-xs text-muted-foreground" title={contact.referrer || ''}>
+                          {contact.utm_source ? `${contact.utm_source}/${contact.utm_medium || '-'}` : contact.referrer ? new URL(contact.referrer).hostname : '-'}
+                        </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(contact.created_at)}
                         </TableCell>
