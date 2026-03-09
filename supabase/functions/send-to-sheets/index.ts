@@ -15,6 +15,10 @@ interface SheetData {
   childAge?: number;
   pageUrl?: string;
   gclid?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  referrer?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -33,7 +37,6 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const data: SheetData = await req.json();
-    
     console.log("Sending to Google Sheets:", data);
 
     const response = await fetch(webhookUrl, {
@@ -49,6 +52,10 @@ const handler = async (req: Request): Promise<Response> => {
         childAge: data.childAge || "",
         pageUrl: data.pageUrl || "",
         gclid: data.gclid || "",
+        utm_source: data.utm_source || "",
+        utm_medium: data.utm_medium || "",
+        utm_campaign: data.utm_campaign || "",
+        referrer: data.referrer || "",
       }),
     });
 
