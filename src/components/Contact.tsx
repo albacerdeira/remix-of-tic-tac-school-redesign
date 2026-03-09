@@ -82,6 +82,7 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       // Use rate-limited edge function
+      const marketing = getMarketingParams();
       const { data: response, error } = await supabase.functions.invoke("submit-contact", {
         body: {
           type: "enrollment",
@@ -90,6 +91,10 @@ const Contact = () => {
           email: data.email || undefined,
           courseFor: data.courseFor,
           childAge: data.courseFor === "child" ? data.childAge : undefined,
+          utm_source: marketing.utm_source,
+          utm_medium: marketing.utm_medium,
+          utm_campaign: marketing.utm_campaign,
+          referrer: marketing.referrer,
         },
       });
 
