@@ -45,7 +45,6 @@ const WhatsAppButton = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    trackClick('whatsapp');
     trackClick('whatsapp_float');
     if (typeof (window as any).gtagSendContactEvent === 'function') {
       (window as any).gtagSendContactEvent('whatsapp_click');
