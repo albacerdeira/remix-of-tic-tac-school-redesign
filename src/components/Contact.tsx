@@ -195,7 +195,7 @@ const Contact = () => {
       icon: MapPin,
       label: "Localização",
       value: "Rua Bahia, 362\nItu - SP\nCEP: 13301-430",
-      href: "https://maps.google.com/?q=Rua+Bahia,+362,+Itu,+SP",
+      href: "https://www.google.com/maps?rlz=1C1VDKB_pt-PTBR1168BR1168&gs_lcrp=EgZjaHJvbWUqCQgAEEUYOxjCAzIJCAAQRRg7GMIDMgkIARBFGDsYwgMyCQgCEEUYOxjCAzIJCAMQRRg7GMIDMgkIBBBFGDsYwgMyCQgFEEUYOxjCAzIJCAYQRRg7GMIDMgkIBxBFGDsYwgPSAQ4xMjE4ODYzNzc3ajBqN6gCCLACAfEFvLgkys4NvHvxBby4JMrODbx7&um=1&ie=UTF-8&fb=1&gl=br&sa=X&geocode=KWNpPduUT8-UMQzIWgQJRV9Y&daddr=TIC+TAC+SCHOOL+Rua+Bahia,+362+Bairro+Brasil+-+S%C3%A3o+Luiz,+Itu+-+SP,+13301-430",
     },
   ];
 
