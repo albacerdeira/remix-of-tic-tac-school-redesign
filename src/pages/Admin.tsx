@@ -343,8 +343,20 @@ const Admin = () => {
                         <TableCell className="font-medium">{contact.name}</TableCell>
                         <TableCell>{contact.email}</TableCell>
                         <TableCell>{contact.phone}</TableCell>
-                        <TableCell className="text-xs text-muted-foreground" title={contact.referrer || ''}>
-                          {contact.utm_source ? `${contact.utm_source}/${contact.utm_medium || '-'}` : contact.referrer ? (() => { try { return new URL(contact.referrer).hostname; } catch { return contact.referrer; } })() : '-'}
+                        <TableCell className="text-xs" title={`UTM Source: ${contact.utm_source || '-'}\nUTM Medium: ${contact.utm_medium || '-'}\nUTM Campaign: ${contact.utm_campaign || '-'}\nReferrer: ${contact.referrer || '-'}`}>
+                          {contact.utm_source ? (
+                            <span className="inline-flex px-2 py-1 rounded bg-primary/10 text-primary font-medium">
+                              {contact.utm_source}/{contact.utm_medium || '-'}
+                            </span>
+                          ) : contact.referrer ? (
+                            <span className="inline-flex px-2 py-1 rounded bg-secondary/10 text-secondary-foreground font-medium">
+                              {(() => { try { return new URL(contact.referrer).hostname; } catch { return contact.referrer; } })()}
+                            </span>
+                          ) : (
+                            <span className="inline-flex px-2 py-1 rounded bg-muted text-muted-foreground">
+                              Direto / Orgânico
+                            </span>
+                          )}
                         </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(contact.created_at)}
@@ -411,8 +423,20 @@ const Admin = () => {
                         <TableCell>{enrollment.email || "-"}</TableCell>
                         <TableCell>{enrollment.course_for}</TableCell>
                         <TableCell>{enrollment.child_age ? `${enrollment.child_age} anos` : "-"}</TableCell>
-                        <TableCell className="text-xs text-muted-foreground" title={enrollment.referrer || ''}>
-                          {enrollment.utm_source ? `${enrollment.utm_source}/${enrollment.utm_medium || '-'}` : enrollment.referrer ? (() => { try { return new URL(enrollment.referrer).hostname; } catch { return enrollment.referrer; } })() : '-'}
+                        <TableCell className="text-xs" title={`UTM Source: ${enrollment.utm_source || '-'}\nUTM Medium: ${enrollment.utm_medium || '-'}\nUTM Campaign: ${enrollment.utm_campaign || '-'}\nReferrer: ${enrollment.referrer || '-'}`}>
+                          {enrollment.utm_source ? (
+                            <span className="inline-flex px-2 py-1 rounded bg-primary/10 text-primary font-medium">
+                              {enrollment.utm_source}/{enrollment.utm_medium || '-'}
+                            </span>
+                          ) : enrollment.referrer ? (
+                            <span className="inline-flex px-2 py-1 rounded bg-secondary/10 text-secondary-foreground font-medium">
+                              {(() => { try { return new URL(enrollment.referrer).hostname; } catch { return enrollment.referrer; } })()}
+                            </span>
+                          ) : (
+                            <span className="inline-flex px-2 py-1 rounded bg-muted text-muted-foreground">
+                              Direto / Orgânico
+                            </span>
+                          )}
                         </TableCell>
                         <TableCell className="text-sm text-muted-foreground">
                           {formatDate(enrollment.created_at)}
