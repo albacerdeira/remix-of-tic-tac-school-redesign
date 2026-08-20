@@ -100,19 +100,11 @@
     }
 
     // Evento de conversão de contato via WhatsApp
+    // IMPORTANTE: esta função apenas dispara o evento de conversão.
+    // A abertura do WhatsApp é responsabilidade de quem chama (evita pop-ups duplicados/bloqueados).
     function gtagReportConversionContact1(url) {
-      var callback = function () {
-        if (typeof url === 'string') {
-          window.open(url, '_blank');
-        }
-      };
       if (typeof gtag === 'function') {
-        gtag('event', 'conversion_event_contact_1', {
-          'event_callback': callback,
-          'event_timeout': 2000
-        });
-      } else if (typeof url === 'string') {
-        window.open(url, '_blank');
+        gtag('event', 'conversion_event_contact_1');
       }
       return false;
     }
