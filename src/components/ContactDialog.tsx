@@ -82,7 +82,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
   };
 
   const onSubmit = async (data: ContactFormData) => {
+    // Abre a aba de forma síncrona (gesto do usuário) para evitar bloqueio de pop-up
+    const popup = window.open("about:blank", "_blank");
     setIsSubmitting(true);
+
+
 
     try {
       // Use rate-limited edge function
