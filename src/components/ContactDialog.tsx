@@ -169,6 +169,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         description: "Seus dados foram salvos. Redirecionando para o WhatsApp...",
       });
     } catch (error) {
+      if (popup && !popup.closed) popup.close();
       if (import.meta.env.DEV) {
         console.error("Error saving contact:", error);
       }
