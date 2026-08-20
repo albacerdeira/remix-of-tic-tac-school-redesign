@@ -109,6 +109,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       }
 
       if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Limite atingido",
           description: "Você já enviou muitos contatos. Tente novamente mais tarde.",
@@ -118,6 +119,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       }
 
       if (response?.code === "VALIDATION_ERROR") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Erro de validação",
           description: response.error || "Verifique os dados informados.",
