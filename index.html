@@ -47,12 +47,17 @@
       'ad_user_data': hasConsent ? 'granted' : 'denied',
       'ad_personalization': hasConsent ? 'granted' : 'denied',
       'analytics_storage': hasConsent ? 'granted' : 'denied',
-      'functionality_storage': hasConsent ? 'granted' : 'denied',
+      'functionality_storage': 'granted',
       'personalization_storage': hasConsent ? 'granted' : 'denied',
       'security_storage': 'granted',
       'wait_for_update': 500
     });
+
+    // Permite envio de pings sem cookies (conversões modeladas) e passagem de gclid pela URL
+    gtag('set', 'ads_data_redaction', false);
+    gtag('set', 'url_passthrough', true);
   </script>
+
   <!-- End Google Consent Mode v2 -->
 
   <!-- Google Ads (gtag.js) -->
