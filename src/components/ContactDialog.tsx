@@ -145,12 +145,20 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       const message = encodeURIComponent("Quero me matricular");
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
       
-      // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
+      // Dispara evento conversion_event_contact_1 (não abre janelas)
       if (typeof (window as any).gtagReportConversionContact1 === 'function') {
         (window as any).gtagReportConversionContact1(whatsappUrl);
-      } else {
-        window.open(whatsappUrl, "_blank");
       }
+
+      // Usa a aba já aberta (evita bloqueio/duplicação de pop-ups)
+      if (popup && !popup.closed) {
+        popup.location.href = whatsappUrl;
+        popup.focus();
+      } else {
+        window.location.href = whatsappUrl;
+      }
+
+
       
       // Reset form and close dialog
       reset();
