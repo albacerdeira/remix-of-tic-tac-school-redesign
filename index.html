@@ -47,12 +47,17 @@
       'ad_user_data': hasConsent ? 'granted' : 'denied',
       'ad_personalization': hasConsent ? 'granted' : 'denied',
       'analytics_storage': hasConsent ? 'granted' : 'denied',
-      'functionality_storage': hasConsent ? 'granted' : 'denied',
+      'functionality_storage': 'granted',
       'personalization_storage': hasConsent ? 'granted' : 'denied',
       'security_storage': 'granted',
       'wait_for_update': 500
     });
+
+    // Permite envio de pings sem cookies (conversões modeladas) e passagem de gclid pela URL
+    gtag('set', 'ads_data_redaction', false);
+    gtag('set', 'url_passthrough', true);
   </script>
+
   <!-- End Google Consent Mode v2 -->
 
   <!-- Google Ads (gtag.js) -->
@@ -73,43 +78,62 @@
   })(window,document,'script','dataLayer','GTM-PH6S5WWK');</script>
   <!-- End Google Tag Manager -->
 
-  <!-- Google Ads Event Snippet Helper -->
+  <!-- Google Ads / GTM / Meta - Event Helpers -->
   <script>
-    function gtagSendEvent(url) {
-      var callback = function () {
-        if (typeof url === 'string') {
-          window.location = url;
+    var GOOGLE_ADS_ID = 'AW-17861223230';
+
+    // Dispara o mesmo evento em: gtag (Google Ads), dataLayer (GTM) e Meta Pixel
+    function trackConversionEvent(eventName, params, metaEvent) {
+      params = params || {};
+      try {
+        if (typeof gtag === 'function') {
+          var gtagParams = {};
+          for (var k in params) { gtagParams[k] = params[k]; }
+          gtagParams.send_to = GOOGLE_ADS_ID;
+          gtag('event', eventName, gtagParams);
         }
-      };
-      if (typeof gtag === 'function') {
-        gtag('event', 'conversion_event_contact', {
-          'event_callback': callback,
-          'event_timeout': 2000
-        });
-      } else if (typeof url === 'string') {
-        window.location = url;
+      } catch (e) {}
+
+      // GTM: eventos customizados precisam do formato { event: 'nome' }
+      try {
+        window.dataLayer = window.dataLayer || [];
+        var dlPayload = { event: eventName };
+        for (var p in params) { dlPayload[p] = params[p]; }
+        window.dataLayer.push(dlPayload);
+      } catch (e) {}
+
+      // Meta Pixel
+      try {
+        if (typeof fbq === 'function' && metaEvent) {
+          fbq('track', metaEvent, { content_name: eventName });
+        }
+      } catch (e) {}
+    }
+
+    function gtagSendEvent(url) {
+      trackConversionEvent('conversion_event_contact', {}, 'Contact');
+      if (typeof url === 'string') {
+        setTimeout(function () { window.location = url; }, 300);
       }
       return false;
     }
-    
+
     function gtagSendContactEvent(eventType) {
-      if (typeof gtag === 'function') {
-        var eventName = eventType || 'conversion_event_contact';
-        gtag('event', eventName);
-      }
+      var name = eventType || 'conversion_event_contact';
+      var metaEvent = name.indexOf('form') !== -1 || name.indexOf('lead') !== -1 ? 'Lead' : 'Contact';
+      trackConversionEvent(name, { method: name }, metaEvent);
     }
 
     // Evento de conversão de contato via WhatsApp
     // IMPORTANTE: esta função apenas dispara o evento de conversão.
     // A abertura do WhatsApp é responsabilidade de quem chama (evita pop-ups duplicados/bloqueados).
     function gtagReportConversionContact1(url) {
-      if (typeof gtag === 'function') {
-        gtag('event', 'conversion_event_contact_1');
-      }
+      trackConversionEvent('conversion_event_contact_1', { link_url: url || '' }, 'Contact');
       return false;
     }
   </script>
-  <!-- End Google Ads Event Snippet -->
+  <!-- End Event Helpers -->
+
   
   <!-- Meta Pixel Code -->
   <script>
