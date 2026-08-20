@@ -82,7 +82,11 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
   };
 
   const onSubmit = async (data: ContactFormData) => {
+    // Abre a aba de forma síncrona (gesto do usuário) para evitar bloqueio de pop-up
+    const popup = window.open("about:blank", "_blank");
     setIsSubmitting(true);
+
+
 
     try {
       // Use rate-limited edge function
@@ -105,6 +109,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       }
 
       if (response?.code === "RATE_LIMIT_EXCEEDED") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Limite atingido",
           description: "Você já enviou muitos contatos. Tente novamente mais tarde.",
@@ -114,6 +119,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       }
 
       if (response?.code === "VALIDATION_ERROR") {
+        if (popup && !popup.closed) popup.close();
         toast({
           title: "Erro de validação",
           description: response.error || "Verifique os dados informados.",
@@ -139,12 +145,20 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
       const message = encodeURIComponent("Quero me matricular");
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
       
-      // Dispara evento conversion_event_contact_1 antes de abrir WhatsApp
+      // Dispara evento conversion_event_contact_1 (não abre janelas)
       if (typeof (window as any).gtagReportConversionContact1 === 'function') {
         (window as any).gtagReportConversionContact1(whatsappUrl);
-      } else {
-        window.open(whatsappUrl, "_blank");
       }
+
+      // Usa a aba já aberta (evita bloqueio/duplicação de pop-ups)
+      if (popup && !popup.closed) {
+        popup.location.href = whatsappUrl;
+        popup.focus();
+      } else {
+        window.location.href = whatsappUrl;
+      }
+
+
       
       // Reset form and close dialog
       reset();
@@ -155,6 +169,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
         description: "Seus dados foram salvos. Redirecionando para o WhatsApp...",
       });
     } catch (error) {
+      if (popup && !popup.closed) popup.close();
       if (import.meta.env.DEV) {
         console.error("Error saving contact:", error);
       }
