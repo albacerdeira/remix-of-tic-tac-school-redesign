@@ -72,7 +72,9 @@ const Contact = () => {
         },
       });
     } catch (error) {
-      console.error("Error sending to sheets:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error sending to sheets:", error);
+      }
     }
   };
 
